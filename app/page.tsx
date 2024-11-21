@@ -244,7 +244,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* <div
+                <div
                     id="experience"
                     className="grid grid-cols-[auto_auto_1fr] grid-rows-[repeat(60,auto)] w-2/3 scroll-my-[50px]">
                     <div className=" col-start-2 row-start-1 row-end-[61] px-4">
@@ -274,10 +274,10 @@ export default function Home() {
                             2022
                         </div>
                     </div>
-                    <div className=" col-start-2 row-start-[37] row-end-[49] z-10 flex justify-center items-start">
+                    <div className="col-start-2 row-start-[37] row-end-[49] z-10 flex justify-center items-start">
                         <div className="sticky top-20 w-[32px] h-[32px] bg-primary rounded-2xl border-[6px] border-background"></div>
                     </div>
-                    <div className=" col-start-1 row-start-[37] row-end-[49]">
+                    <div className="col-start-1 row-start-[37] row-end-[49]">
                         <div className="sticky top-20 text-2xl font-extrabold">
                             2021
                         </div>
@@ -377,7 +377,7 @@ export default function Home() {
                             <Button variant={"outline"} className="w-fit">
                                 MISSIONS
                             </Button>
-                            <ul>
+                            {/* <ul>
                                 <li>
                                     Refonte de la totalité d’une application en
                                     interne
@@ -387,7 +387,7 @@ export default function Home() {
                                     aux besoin avec des solutions modernes
                                 </li>
                                 <li>Choix UI/UX pertinents</li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                     <div className=" col-start-2 row-start-[22] row-end-[23] flex justify-center items-end">
@@ -429,7 +429,7 @@ export default function Home() {
                             <Button variant={"outline"} className="w-fit">
                                 MISSIONS
                             </Button>
-                            <ul>
+                            {/* <ul>
                                 <li>
                                     Refonte de la totalité d’une application en
                                     interne
@@ -439,7 +439,7 @@ export default function Home() {
                                     aux besoin avec des solutions modernes
                                 </li>
                                 <li>Choix UI/UX pertinents</li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                     <div className=" col-start-2 row-start-[27] row-end-[28] flex justify-center items-end">
@@ -484,7 +484,7 @@ export default function Home() {
                             <Button variant={"outline"} className="w-fit">
                                 MISSIONS
                             </Button>
-                            <ul>
+                            {/* <ul>
                                 <li>
                                     Refonte de la totalité d’une application en
                                     interne
@@ -494,14 +494,14 @@ export default function Home() {
                                     aux besoin avec des solutions modernes
                                 </li>
                                 <li>Choix UI/UX pertinents</li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                     <div className=" col-start-2 row-start-[52] row-end-[53] flex justify-center items-end">
                         <div className="sticky top-20 w-[32px] h-[22px] bg-primary rounded-2xl border-[6px] border-background"></div>
                     </div>
                     <div className=" col-start-3 row-start-[53] row-end-[61] flex flex-col gap-3 p-4"></div>
-                </div> */}
+                </div>
             </main>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
         </div>
