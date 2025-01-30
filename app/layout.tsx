@@ -34,10 +34,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className="scroll-smooth">
-            <head />
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`${JetBrainMono.variable} ${geistMono.variable} antialiased`}>
+                className={`${JetBrainMono.variable} ${geistMono.variable} antialiased overflow-hidden`}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"

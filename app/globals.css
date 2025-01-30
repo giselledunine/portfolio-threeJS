@@ -6,17 +6,41 @@ body {
   font-family: var(--font-jetbrain-mono);
 }
 
+li {
+  display: flex;
+  align-items: center;
+}
+
+.cursor-animation::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  margin-left: 5px;
+  background-color:#2CD63D;
+}
+
+.cursor-animation-play::after {
+  animation: blink 0.8s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+      opacity: 0;
+  }
+}
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 64 51% 90%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
+    --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
@@ -35,13 +59,13 @@ body {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    /* --background: 0 0% 3.9%; */
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --primary: 51 100% 93%;
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -65,8 +89,24 @@ body {
 @layer base {
   * {
     @apply border-border;
+}
+
+body {
+  @apply text-primary;
+}
+
+  html.light body {
+    background: radial-gradient(48% 48% at center,#FFBCC5, #F0F2D7);
   }
-  body {
-    @apply bg-background text-foreground;
+
+  html.dark body {
+    background: radial-gradient(48% 48% at center,#FFBCC5, #000000);
   }
+
+  /* body > div {
+    background-image: url("../public/radial.jpg"); 
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; 
+  } */
 }
