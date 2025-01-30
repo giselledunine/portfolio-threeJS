@@ -9,9 +9,17 @@ export default {
     ],
     theme: {
         extend: {
+            transitionProperty: {
+                height: "height",
+            },
+            listStyleImage: {
+                circle: 'url("/public/circle.svg")',
+            },
             backgroundImage: {
-                "radial-gradient":
-                    "radial-gradient(48% 48% at center, var(--tw-gradient-stops))",
+                radialLight:
+                    "radial-gradient(48% 48% at center,#FFBCC5, #F0F2D7)",
+                radialDark:
+                    "radial-gradient(48% 48% at center, #FFBCC5, #000000)",
             },
             boxShadow: {
                 "3xl": "0px 0px 15px 2px rgba(0, 0, 0, 0.3)",
