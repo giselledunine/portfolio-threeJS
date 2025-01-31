@@ -402,7 +402,7 @@ export function Overlay({
                                         ease: "easeOut",
                                         duration: 0.3,
                                     }}
-                                    className="hover:cursor-pointer w-full h-full bg-gray-200 border-4 rounded-xl border-primary bg-[url(/process1.png)] bg-cover"></motion.div>
+                                    className="hover:cursor-pointer w-full h-full bg-gray-200 border-2 rounded-xl border-primary bg-[url(/process1.png)] bg-cover"></motion.div>
                                 <motion.div
                                     onClick={() =>
                                         setIsZoomed((prev) =>
@@ -435,7 +435,7 @@ export function Overlay({
                                         ease: "easeOut",
                                         duration: 0.3,
                                     }}
-                                    className="w-full h-full bg-gray-200 hover:cursor-pointer border-4 rounded-xl border-primary bg-[url(/giselle-character.png)] bg-cover"></motion.div>
+                                    className="w-full h-full bg-gray-200 hover:cursor-pointer border-2 rounded-xl border-primary bg-[url(/giselle-character.png)] bg-cover"></motion.div>
                                 <motion.div
                                     onClick={() =>
                                         setIsZoomed((prev) =>
@@ -460,7 +460,7 @@ export function Overlay({
                                         ease: "easeOut",
                                         duration: 0.3,
                                     }}
-                                    className="h-full w-full hover:cursor-pointer bg-gray-200 border-4 rounded-xl border-primary bg-[url(/process3.png)] bg-cover bg-center bg-primary"></motion.div>
+                                    className="h-full w-full hover:cursor-pointer bg-gray-200 border-2 rounded-xl border-primary bg-[url(/process3.png)] bg-cover bg-center bg-primary"></motion.div>
                             </div>
                         </div>
                     </div>
