@@ -321,7 +321,7 @@ export default function Header({
                             onMouseEnter={() => animateLine("line3")}
                             onMouseLeave={() => animateLine("")}
                             className="hover:cursor-pointer flex gap-2 items-center">
-                            <p>Gisèle</p>
+                            <p>Giselle</p>
                             <div
                                 id="line3"
                                 className="w-0 h-[2px] bg-primary rounded-md"></div>
@@ -349,29 +349,29 @@ export default function Header({
                     </div>
                 </div>
             </div>
-            <section className="w-[100vw] h-[100px] flex justify-center fixed top-0 z-40">
+            <section className="w-[100vw] h-[100px] flex justify-center fixed top-0 z-10">
                 <div
                     ref={header}
                     className="flex gap-8 justify-center items-center invisible lg:visible">
                     <div
                         onClick={() => onSectionChange(0)}
                         className="hover:cursor-pointer">
-                        <p className="text-primary">Accueil</p>
+                        <p className="text-primary">Home</p>
                     </div>
                     <div
                         onClick={() => onSectionChange(1)}
                         className="hover:cursor-pointer">
-                        <p className="text-primary">Parcours</p>
+                        <p className="text-primary">Journey</p>
                     </div>
                     <div
                         onClick={() => onSectionChange(2)}
                         className="hover:cursor-pointer">
-                        <p className="text-primary">Modèle</p>
+                        <p className="text-primary">Giselle</p>
                     </div>
                     <div
                         onClick={() => onSectionChange(3)}
                         className="hover:cursor-pointer">
-                        <p className="text-primary">Mes réseaux</p>
+                        <p className="text-primary">Socials</p>
                     </div>
                     <div
                         onClick={() => onSectionChange(4)}

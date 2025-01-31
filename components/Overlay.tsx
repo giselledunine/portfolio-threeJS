@@ -151,13 +151,22 @@ export function Overlay({
     const [strokeColor, setStrokeColor] = useState(
         theme === "dark" ? "#FFFADE" : "#000"
     );
-    const image1 = useRef(null);
-    const image2 = useRef(null);
-    const image3 = useRef(null);
     const dribbble = useRef(null);
     const linkedin = useRef(null);
     const behance = useRef(null);
     const artstation = useRef(null);
+
+    const [isZoomed, setIsZoomed] = useState("none");
+    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isZoomed) return;
+        const { left, top, width, height } =
+            e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+        setPosition({ x, y });
+    };
 
     useEffect(() => {
         if (theme === "light") {
@@ -246,6 +255,12 @@ export function Overlay({
         }
     }, [section, dummySkills]);
 
+    useEffect(() => {
+        if (section !== 3) {
+            setIsZoomed("none");
+        }
+    }, [section]);
+
     // const fullText =
     //     "<b>Nom:</b> Sophia Hmamouche\n<b>Âge:</b> 23 ans\n<b>Passions:</b> Chant, Dessin, Animation, Guitar, Escalade";
 
@@ -283,13 +298,12 @@ export function Overlay({
                     <NameIcon color={strokeColor} />
                     <div className="bg-primary py-2 px-4 rounded-xl md:ml-[100px]">
                         <b className="text-secondary lg:text-xl text-md">
-                            Développeuse Web Créative
+                            Creative Web Developer
                         </b>
                     </div>
                     <p className="md:w-[500px] md:ml-[200px] text-md lg:text-lg">
-                        Bienvenu, dans mon portfolio. Tout ce que vous avez
-                        besoin de savoir sur moi et mon parcours professionnel
-                        se trouve ici :)
+                        Welcome to my Portfolio, everything you need to know
+                        about my journey and my project is here :)
                     </p>
                     <button onClick={scrollToSection}>
                         <ChevronDown></ChevronDown>
@@ -309,10 +323,10 @@ export function Overlay({
                         color={strokeColor}></ParcoursIcon>
                     <div className="flex flex-col gap-4 text-sm lg:text-lg">
                         <p>
-                            Je viens d’une formation de dévelopeuse Web, j’ai
-                            obtenu mon Master Tech Lead en 2023 après 3 ans
-                            d’alternance en tant que dévelopeuse fullstack
-                            Javascript.
+                            I come from a fullstack web developer background, I
+                            have graduated with a Tech Lead Master in Paris in
+                            2023 after 3 years of internship in two different
+                            companies as a fulltack Javascript Web developer.
                         </p>
                         <div className="grid grid-rows-[repeat(5,auto)] grid-cols-3 grid-flow-col gap-2 gap-x-4 sm:gap-x-4">
                             {skills.map((skill) => (
@@ -347,9 +361,9 @@ export function Overlay({
                         <div className="grid grid-rows-[repeat(3,auto)] gap-4">
                             <div>
                                 <p className="text-sm md:text-md">
-                                    Giselle est le premier personnage 3d que
-                                    j&apos;ai réalisé sur Blender. Elle est
-                                    inspirée par moi et mon style graphique.
+                                    Giselle is the first 3D character I did. She
+                                    has been created on Blender. She is inspired
+                                    by me and my graphique style.
                                 </p>
                             </div>
                             <div className="text-sm md:text-md">
@@ -363,72 +377,90 @@ export function Overlay({
                                     <b>Texture :</b> Adobe 3d Substance
                                 </p>
                             </div>
-                            <div className="grid grid-cols-3 gap-4">
-                                <div
-                                    ref={image1}
-                                    onMouseEnter={() =>
-                                        gsap.to(image1.current, {
-                                            scale: 4,
-                                            duration: 1,
-                                            transform: "translate(-50%, -100%)",
-                                            zIndex: 50,
-                                        })
+                            <div className="flex justify-space-between gap-4 h-[100px]">
+                                <motion.div
+                                    onClick={() =>
+                                        setIsZoomed((prev) =>
+                                            prev == "image1" ? "none" : "image1"
+                                        )
                                     }
-                                    onMouseLeave={() =>
-                                        gsap.to(image1.current, {
-                                            scale: 1,
-                                            duration: 1,
-                                            transform: "translate(0)",
-                                            zIndex: 0,
-                                        })
+                                    onMouseMove={handleMouseMove}
+                                    animate={{
+                                        scale: isZoomed == "image1" ? 6 : 1,
+                                        zIndex: isZoomed == "image1" ? 50 : 10,
+                                        x:
+                                            isZoomed == "image1"
+                                                ? (0.5 - position.x) * 100 + "%"
+                                                : "0%",
+                                        y:
+                                            isZoomed == "image1"
+                                                ? (-1 - position.y) * 100 + "%"
+                                                : "0%",
+                                    }}
+                                    transition={{
+                                        type: "tween",
+                                        ease: "easeOut",
+                                        duration: 0.3,
+                                    }}
+                                    className="hover:cursor-pointer w-full h-full bg-gray-200 border-4 rounded-xl border-primary bg-[url(/process1.png)] bg-cover"></motion.div>
+                                <motion.div
+                                    onClick={() =>
+                                        setIsZoomed((prev) =>
+                                            prev == "image2" ? "none" : "image2"
+                                        )
                                     }
-                                    className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary">
-                                    <Image
-                                        src={"/bioculture.jpeg"}
-                                        alt="image1"
-                                        width={120}
-                                        height={120}></Image>
-                                </div>
-                                <div
-                                    ref={image2}
-                                    onMouseEnter={() =>
-                                        gsap.to(image2.current, {
-                                            scale: 4,
-                                            duration: 1,
-                                            transform:
-                                                "translate(-150%, -100%)",
-                                            zIndex: 50,
-                                        })
+                                    onMouseMove={handleMouseMove}
+                                    animate={{
+                                        scale: isZoomed == "image2" ? 7 : 1,
+                                        zIndex: isZoomed == "image2" ? 100 : 10,
+                                        width:
+                                            isZoomed == "image2"
+                                                ? "125px"
+                                                : "100%",
+                                        height:
+                                            isZoomed == "image2"
+                                                ? "100px"
+                                                : "100%",
+                                        x:
+                                            isZoomed == "image2"
+                                                ? (-4 - position.x) * 100 + "%"
+                                                : "0%",
+                                        y:
+                                            isZoomed == "image2"
+                                                ? (-1 - position.y) * 100 + "%"
+                                                : "0%",
+                                    }}
+                                    transition={{
+                                        type: "tween",
+                                        ease: "easeOut",
+                                        duration: 0.3,
+                                    }}
+                                    className="w-full h-full bg-gray-200 hover:cursor-pointer border-4 rounded-xl border-primary bg-[url(/giselle-character.png)] bg-cover"></motion.div>
+                                <motion.div
+                                    onClick={() =>
+                                        setIsZoomed((prev) =>
+                                            prev == "image3" ? "none" : "image3"
+                                        )
                                     }
-                                    onMouseLeave={() =>
-                                        gsap.to(image2.current, {
-                                            scale: 1,
-                                            duration: 1,
-                                            transform: "translate(0)",
-                                            zIndex: 0,
-                                        })
-                                    }
-                                    className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary"></div>
-                                <div
-                                    ref={image3}
-                                    onMouseEnter={() =>
-                                        gsap.to(image3.current, {
-                                            scale: 4,
-                                            duration: 1,
-                                            transform:
-                                                "translate(-250%, -100%)",
-                                            zIndex: 50,
-                                        })
-                                    }
-                                    onMouseLeave={() =>
-                                        gsap.to(image3.current, {
-                                            scale: 1,
-                                            duration: 1,
-                                            transform: "translate(0)",
-                                            zIndex: 0,
-                                        })
-                                    }
-                                    className="bg-gray-200 border-4 rounded-xl border-primary"></div>
+                                    onMouseMove={handleMouseMove}
+                                    animate={{
+                                        scale: isZoomed == "image3" ? 6 : 1,
+                                        zIndex: isZoomed == "image3" ? 60 : 10,
+                                        x:
+                                            isZoomed == "image3"
+                                                ? (-2 - position.x) * 100 + "%"
+                                                : "0%",
+                                        y:
+                                            isZoomed == "image3"
+                                                ? (-1 - position.y) * 100 + "%"
+                                                : "0%",
+                                    }}
+                                    transition={{
+                                        type: "tween",
+                                        ease: "easeOut",
+                                        duration: 0.3,
+                                    }}
+                                    className="h-full w-full hover:cursor-pointer bg-gray-200 border-4 rounded-xl border-primary bg-[url(/process3.png)] bg-cover bg-center bg-primary"></motion.div>
                             </div>
                         </div>
                     </div>
