@@ -16,7 +16,7 @@ import { Overlay } from "@/components/Overlay";
 import Header from "@/components/Header";
 import { useTheme } from "next-themes";
 import gsap from "gsap";
-import { Stats } from "@react-three/drei";
+//import { Stats } from "@react-three/drei";
 
 type ExtendedScroll = ReturnType<typeof useScroll> & {
     scroll: {
@@ -142,7 +142,7 @@ const ScrollAnimation = ({
 
     return (
         <>
-            <Stats />
+            {/* <Stats /> */}
             <directionalLight
                 ref={lightRef}
                 position={[0, 1, 3]}

@@ -391,9 +391,6 @@ export function Character({
                     : null;
             }
 
-            console.log("current£Action", currentAction);
-            console.log("action", action);
-
             if (currentAction !== action && action) {
                 prepareCrossFade(currentAction, action, 0.35, type);
             }
@@ -415,7 +412,6 @@ export function Character({
     }, [currentBaseAction, playOnALoop]);
 
     useEffect(() => {
-        console.log("additive action");
         playOnALoop(currentAdditiveAction, "face");
     }, [currentAdditiveAction, playOnALoop]);
 
@@ -863,11 +859,9 @@ export function Character({
             const withWeightBase = Object.values(baseActions).filter(
                 (el) => el.weight > 0
             );
-            console.log("withWeightBase", withWeightBase);
             const withWeightAdditive = Object.values(additiveActions).filter(
                 (el) => el.weight > 0
             );
-            console.log("withWeightBaseAdditive", withWeightAdditive);
             withWeightBase.forEach((el) => {
                 const clip = el.action?.getClip();
                 if (clip)

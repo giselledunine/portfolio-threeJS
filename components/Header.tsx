@@ -294,7 +294,6 @@ export default function Header({
                         className="absolute top-6 opacity-0 text-secondary"></X>
                 </div>
                 <div
-                    onBlur={() => console.log("blur")}
                     className={`flex flex-col justify-center text-lg font-bold shadow-inner backdrop-blur-md bg-[${variables.background}] bg-opacity-25 w-[300px] h-[100vh] z-50 `}>
                     <div className="flex flex-col gap-4 p-6">
                         <div

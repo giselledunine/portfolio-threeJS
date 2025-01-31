@@ -8,9 +8,10 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
 import { AdditiveActionName, BaseActionName } from "./Gltf/Character";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ParcoursIcon from "./Icons/ParcoursIcon";
 import GiselleIcon from "./Icons/GiselleIcon";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -147,6 +148,24 @@ export function Overlay({
 
     const [skills, setSkills] = useState(dummySkills);
     const [animationWithTimeout, setAnimationWithTimeout] = useState(false);
+    const [strokeColor, setStrokeColor] = useState(
+        theme === "dark" ? "#FFFADE" : "#000"
+    );
+    const image1 = useRef(null);
+    const image2 = useRef(null);
+    const image3 = useRef(null);
+    const dribbble = useRef(null);
+    const linkedin = useRef(null);
+    const behance = useRef(null);
+    const artstation = useRef(null);
+
+    useEffect(() => {
+        if (theme === "light") {
+            setStrokeColor("#000");
+        } else {
+            setStrokeColor("#FFFADE");
+        }
+    }, [theme]);
 
     useEffect(() => {
         if (animation) {
@@ -155,6 +174,56 @@ export function Overlay({
             setTimeout(() => setAnimationWithTimeout(false), 1800);
         }
     }, [animation]);
+
+    useEffect(() => {
+        gsap.from(dribbble.current, {
+            y: -20, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+        });
+        gsap.from(linkedin.current, {
+            y: 10, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+        });
+        gsap.from(behance.current, {
+            y: -20, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+        });
+        gsap.from(artstation.current, {
+            y: 30, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+        });
+        gsap.to(dribbble.current, {
+            y: 20, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+            yoyo: true,
+            repeat: -1,
+            duration: 8,
+        });
+        gsap.to(linkedin.current, {
+            y: -30, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+            yoyo: true,
+            repeat: -1,
+            duration: 8,
+            delay: 0.2,
+        });
+        gsap.to(behance.current, {
+            y: 40, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+            yoyo: true,
+            repeat: -1,
+            duration: 8,
+            delay: 0.4,
+        });
+        gsap.to(artstation.current, {
+            y: -20, // Moves the ball 20px down
+            ease: "power1.inOut", // Smooth easing});
+            yoyo: true,
+            repeat: -1,
+            duration: 8,
+            delay: 0.6,
+        });
+    }, []);
 
     useEffect(() => {
         if (section == 1) {
@@ -199,6 +268,11 @@ export function Overlay({
 
     return (
         <Scroll html>
+            {/* <motion.div>
+                <div>
+                    <Progress value={}></Progress>
+                </div>
+            </motion.div> */}
             <motion.div
                 id="accueil"
                 initial={{ opacity: 0 }}
@@ -206,7 +280,7 @@ export function Overlay({
                 transition={{ duration: 1 }}
                 className="h-[100vh] w-[100vw] flex justify-center items-end md:items-center">
                 <div className="w-full md:max-w-sm lg:max-w-screen-md flex flex-col gap-12 p-8 md:p-0 justify-center items-center">
-                    <NameIcon color={theme === "dark" ? "#FFFADE" : "#000"} />
+                    <NameIcon color={strokeColor} />
                     <div className="bg-primary py-2 px-4 rounded-xl md:ml-[100px]">
                         <b className="text-secondary lg:text-xl text-md">
                             Développeuse Web Créative
@@ -232,9 +306,7 @@ export function Overlay({
                     className="flex flex-col gap-6 mt-6 sm:mt-0 lg:gap-12 md:w-[55%] lg:w-[50%] p-8 md-p-0">
                     <ParcoursIcon
                         width="100%"
-                        color={
-                            theme === "dark" ? "#FFFADE" : "black"
-                        }></ParcoursIcon>
+                        color={strokeColor}></ParcoursIcon>
                     <div className="flex flex-col gap-4 text-sm lg:text-lg">
                         <p>
                             Je viens d’une formation de dévelopeuse Web, j’ai
@@ -271,9 +343,7 @@ export function Overlay({
                     <div className="flex flex-col md:w-[50%] gap-6 lg:gap-12 justify-start">
                         <GiselleIcon
                             width="100%"
-                            color={
-                                theme === "dark" ? "#FFFADE" : "black"
-                            }></GiselleIcon>
+                            color={strokeColor}></GiselleIcon>
                         <div className="grid grid-rows-[repeat(3,auto)] gap-4">
                             <div>
                                 <p className="text-sm md:text-md">
@@ -294,9 +364,71 @@ export function Overlay({
                                 </p>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
-                                <motion.div className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary"></motion.div>
-                                <motion.div className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary"></motion.div>
-                                <motion.div className="bg-gray-200 border-4 rounded-xl border-primary"></motion.div>
+                                <div
+                                    ref={image1}
+                                    onMouseEnter={() =>
+                                        gsap.to(image1.current, {
+                                            scale: 4,
+                                            duration: 1,
+                                            transform: "translate(-50%, -100%)",
+                                            zIndex: 50,
+                                        })
+                                    }
+                                    onMouseLeave={() =>
+                                        gsap.to(image1.current, {
+                                            scale: 1,
+                                            duration: 1,
+                                            transform: "translate(0)",
+                                            zIndex: 0,
+                                        })
+                                    }
+                                    className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary">
+                                    <Image
+                                        src={"/bioculture.jpeg"}
+                                        alt="image1"
+                                        width={120}
+                                        height={120}></Image>
+                                </div>
+                                <div
+                                    ref={image2}
+                                    onMouseEnter={() =>
+                                        gsap.to(image2.current, {
+                                            scale: 4,
+                                            duration: 1,
+                                            transform:
+                                                "translate(-150%, -100%)",
+                                            zIndex: 50,
+                                        })
+                                    }
+                                    onMouseLeave={() =>
+                                        gsap.to(image2.current, {
+                                            scale: 1,
+                                            duration: 1,
+                                            transform: "translate(0)",
+                                            zIndex: 0,
+                                        })
+                                    }
+                                    className="w-full h-full bg-gray-200 border-4 rounded-xl border-primary"></div>
+                                <div
+                                    ref={image3}
+                                    onMouseEnter={() =>
+                                        gsap.to(image3.current, {
+                                            scale: 4,
+                                            duration: 1,
+                                            transform:
+                                                "translate(-250%, -100%)",
+                                            zIndex: 50,
+                                        })
+                                    }
+                                    onMouseLeave={() =>
+                                        gsap.to(image3.current, {
+                                            scale: 1,
+                                            duration: 1,
+                                            transform: "translate(0)",
+                                            zIndex: 0,
+                                        })
+                                    }
+                                    className="bg-gray-200 border-4 rounded-xl border-primary"></div>
                             </div>
                         </div>
                     </div>
@@ -306,11 +438,50 @@ export function Overlay({
                 id="socials"
                 className="h-[100vh] w-[100vw] flex items-center p-[100px]">
                 <motion.div
-                    className="mt-6 sm:mt-0"
+                    className="mt-6 sm:mt-0 grid grid-cols-4 gap-8"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 1 }}>
-                    Socials
+                    <a
+                        ref={dribbble}
+                        href="https://dribbble.com/Giselledunine"
+                        target="blank">
+                        <Image
+                            src={"/dribbble-icon.svg"}
+                            alt="dribbble"
+                            width={100}
+                            height={100}></Image>
+                    </a>
+                    <a
+                        ref={linkedin}
+                        href="https://www.linkedin.com/in/sophia-hmamouche/"
+                        target="blank">
+                        <Image
+                            src={"/linkedin.svg"}
+                            alt="linkedin"
+                            width={100}
+                            height={100}></Image>
+                    </a>
+                    <a
+                        ref={behance}
+                        href="https://www.behance.net/sophiahmamouche"
+                        target="blank">
+                        <Image
+                            src={"/behance.png"}
+                            alt="behance"
+                            width={100}
+                            height={100}></Image>
+                    </a>
+                    <a
+                        ref={artstation}
+                        href="https://giselledunine.artstation.com/"
+                        target="blank">
+                        <Image
+                            src={"/artstation.webp"}
+                            alt="artstation"
+                            width={100}
+                            height={100}></Image>
+                    </a>
                 </motion.div>
             </div>
             <div
