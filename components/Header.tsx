@@ -96,11 +96,19 @@ export default function Header({
                     ease: "bounce",
                 });
             } else {
-                gsap.to(drawer.current, {
-                    duration: 1,
-                    right: "-300px",
-                    ease: "power3.inOut",
-                });
+                if (visibleHeader) {
+                    gsap.to(drawer.current, {
+                        duration: 1,
+                        right: "-380px",
+                        ease: "bounce",
+                    });
+                } else {
+                    gsap.to(drawer.current, {
+                        duration: 1,
+                        right: "-300px",
+                        ease: "bounce",
+                    });
+                }
                 gsap.to(menuIcon.current, {
                     duration: 1,
                     opacity: 1,
@@ -115,7 +123,7 @@ export default function Header({
                 });
             }
         }
-    }, [open]);
+    }, [open, visibleHeader]);
 
     const animateLine = useCallback(
         (element: string) => {
@@ -136,6 +144,12 @@ export default function Header({
     );
 
     const menuElementActive = useCallback((element: string) => {
+        [1, 2, 3, 4, 5].forEach((el) => {
+            gsap.to(`#line${el}`, {
+                duration: 1,
+                width: "0%",
+            });
+        });
         gsap.to(`#${element}`, {
             duration: 1,
             width: "100%",
@@ -150,32 +164,24 @@ export default function Header({
             setVisibleHeader(true);
         }
 
-        menuElementActive(`section${section}`);
+        menuElementActive(`line${section + 1}`);
     }, [section, visibleHeader, menuElementActive]);
 
     useEffect(() => {
-        if (header.current && icon.current) {
+        if (header.current) {
             if (!visibleHeader) {
+                console.log("novisible", header.current);
                 gsap.to(header.current, {
                     duration: 1,
                     opacity: 0,
                     ease: "power3.inOut",
                 });
-                gsap.to(icon.current, {
-                    duration: 1,
-                    right: "2rem",
-                    ease: "back.out(2.5)",
-                });
             } else {
+                setOpen(false);
                 gsap.to(header.current, {
                     duration: 1,
                     opacity: 1,
                     ease: "power3.inOut",
-                });
-                gsap.to(icon.current, {
-                    duration: 1,
-                    right: "-4rem",
-                    ease: "back.in(2.5)",
                 });
             }
         }
@@ -280,7 +286,7 @@ export default function Header({
             <div
                 ref={drawer}
                 id="menuDrawer"
-                className="absolute z-50 flex gap-4 justify-end -right-[300px]">
+                className="absolute z-50 flex gap-4 justify-end -right-[380px]">
                 <div
                     className="w-fit h-fit hover:cursor-pointer bg-primary p-2 rounded-lg mt-4 ml-4"
                     onClick={() => setOpen((prev) => !prev)}

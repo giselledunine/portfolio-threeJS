@@ -18,10 +18,6 @@ gsap.registerPlugin(ScrollToPlugin);
 export function Overlay({
     animation,
     setAnimation,
-    // baseActions,
-    // setBaseActions,
-    // additiveActions,
-    // setAdditiveActions,
     section,
     setSection,
     currentBaseAction,
@@ -43,9 +39,6 @@ export function Overlay({
     >;
 }) {
     const { theme } = useTheme();
-    // const [text, setText] = useState("");
-    // const [index, setIndex] = useState(0);
-    //const [animationCursor, setAnimationCursor] = useState(false);
     gsap.registerPlugin(ScrollToPlugin);
     const scroll = useScroll();
     const baseActionsName = [
@@ -283,16 +276,11 @@ export function Overlay({
 
     return (
         <Scroll html>
-            {/* <motion.div>
-                <div>
-                    <Progress value={}></Progress>
-                </div>
-            </motion.div> */}
             <motion.div
                 id="accueil"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.3 }}
                 className="h-[100vh] w-[100vw] flex justify-center items-end md:items-center">
                 <div className="w-full md:max-w-sm lg:max-w-screen-md flex flex-col gap-12 p-8 md:p-0 justify-center items-center">
                     <NameIcon color={strokeColor} />
@@ -316,7 +304,7 @@ export function Overlay({
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 0.3 }}
                     className="flex flex-col gap-6 mt-6 sm:mt-0 lg:gap-12 md:w-[55%] lg:w-[50%] p-8 md-p-0">
                     <ParcoursIcon
                         width="100%"
@@ -353,7 +341,7 @@ export function Overlay({
                     className="flex items-end md:items-center justify-end"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ duration: 2 }}>
+                    transition={{ duration: 0.3 }}>
                     <div className="flex flex-col md:w-[50%] gap-6 lg:gap-12 justify-start">
                         <GiselleIcon
                             width="100%"
@@ -470,10 +458,10 @@ export function Overlay({
                 id="socials"
                 className="h-[100vh] w-[100vw] flex items-center p-[100px]">
                 <motion.div
-                    className="mt-6 sm:mt-0 grid grid-cols-4 gap-8"
+                    className="mt-6 sm:mt-0 grid grid-cols-5 gap-8 p-8"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ duration: 1 }}>
+                    transition={{ duration: 0.3 }}>
                     <a
                         ref={dribbble}
                         href="https://dribbble.com/Giselledunine"
@@ -481,8 +469,8 @@ export function Overlay({
                         <Image
                             src={"/dribbble-icon.svg"}
                             alt="dribbble"
-                            width={100}
-                            height={100}></Image>
+                            width={80}
+                            height={80}></Image>
                     </a>
                     <a
                         ref={linkedin}
@@ -491,8 +479,8 @@ export function Overlay({
                         <Image
                             src={"/linkedin.svg"}
                             alt="linkedin"
-                            width={100}
-                            height={100}></Image>
+                            width={80}
+                            height={80}></Image>
                     </a>
                     <a
                         ref={behance}
@@ -501,8 +489,8 @@ export function Overlay({
                         <Image
                             src={"/behance.png"}
                             alt="behance"
-                            width={100}
-                            height={100}></Image>
+                            width={80}
+                            height={80}></Image>
                     </a>
                     <a
                         ref={artstation}
@@ -511,8 +499,18 @@ export function Overlay({
                         <Image
                             src={"/artstation.webp"}
                             alt="artstation"
-                            width={100}
-                            height={100}></Image>
+                            width={80}
+                            height={80}></Image>
+                    </a>
+                    <a
+                        ref={linkedin}
+                        href="https://github.com/giselledunine"
+                        target="blank">
+                        <Image
+                            src={"/github.png"}
+                            alt="artstation"
+                            width={80}
+                            height={80}></Image>
                     </a>
                 </motion.div>
             </div>
@@ -589,7 +587,7 @@ export function Overlay({
                         className="flex justify-center md:justify-end items-end md:items-center"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        transition={{ duration: 1 }}>
+                        transition={{ duration: 0.3 }}>
                         <Button
                             className="w-fit text-sm px-2 py-1 sm:px-4 py-2"
                             variant={"destructive"}
