@@ -9,12 +9,7 @@ import {
 } from "@/components/Gltf/Character";
 //import { Character2, BaseActionName } from "@/components/Gltf/character2";
 //import { Character3 } from "@/components/Gltf/character3";
-import {
-    CameraControls,
-    ScrollControls,
-    useProgress,
-    useScroll,
-} from "@react-three/drei";
+import { CameraControls, ScrollControls, useScroll } from "@react-three/drei";
 import { easing } from "maath";
 import * as THREE from "three";
 import { Overlay } from "@/components/Overlay";
