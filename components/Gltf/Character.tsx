@@ -254,6 +254,9 @@ export function Character({
     }, [isWireframe, scene, clippingPlane, clippingPlaneIsWireframe]);
     const { nodes, materials } = useGraph(clone) as GLTFResult;
     const { mixer } = useAnimations(animations, group);
+    // const [mouseX, setMouseX] = useState(0);
+    // const [mouseY, setMouseY] = useState(0);
+    // const lerpFactor = 0.05;
 
     const [baseActions, setBaseActions] = useState<BaseActionsType>({
         idle: { weight: 1 },
@@ -407,6 +410,21 @@ export function Character({
     const scroll = useScroll();
     const tl = useRef(gsap.timeline());
 
+    // useEffect(() => {
+    //     const updateMouse = (event: MouseEvent) => {
+    //         const halfWidth = window.innerWidth / 2;
+    //         const halfHeight = window.innerHeight / 2;
+
+    //         // Normaliser la position de la souris (valeurs entre -1 et 1)
+    //         // setMouseX((event.clientX - halfWidth) / halfWidth);
+    //         // setMouseY((event.clientY - halfHeight) / halfHeight);
+    //     };
+    //     window.addEventListener("mousemove", updateMouse);
+    //     return () => {
+    //         window.removeEventListener("mousemove", updateMouse);
+    //     };
+    // });
+
     useEffect(() => {
         playOnALoop(currentBaseAction, "animation");
     }, [currentBaseAction, playOnALoop]);
@@ -437,9 +455,9 @@ export function Character({
         mm.add("(min-width:769px)", () => {
             if (group.current) {
                 tl.current.set(group.current.position, {
-                    x: -4,
-                    y: -4.5,
-                    z: 0,
+                    x: -3,
+                    y: -4.3,
+                    z: 2,
                 });
                 tl.current.set(group.current.rotation, {
                     x: 0,
@@ -854,6 +872,19 @@ export function Character({
         //ANIMATION ON SCROLL
         tl.current.seek(scroll.offset * tl.current.duration());
 
+        // if (group.current) {
+        //     // Appliquer une rotation inverse à la caméra
+        //     group.current.position.y = THREE.MathUtils.lerp(
+        //         group.current.position.y,
+        //         -mouseX * 0.05,
+        //         lerpFactor
+        //     );
+        //     group.current.position.x = THREE.MathUtils.lerp(
+        //         group.current.position.x,
+        //         mouseY * 0.1,
+        //         lerpFactor
+        //     );
+        // }
         //ANIMATION ON CLICK
         if (animation) {
             const withWeightBase = Object.values(baseActions).filter(
