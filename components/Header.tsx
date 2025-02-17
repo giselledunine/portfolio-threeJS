@@ -4,6 +4,9 @@ import { useTheme } from "next-themes";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MenuIcon, X } from "lucide-react";
+import { useProgress } from "@react-three/drei";
+import { Progress } from "./ui/progress";
+import { motion } from "framer-motion";
 
 export default function Header({
     section,
@@ -31,6 +34,24 @@ export default function Header({
         opacityMoon: "opacity-100",
         opacitySun: "opacity-0",
     });
+    const { progress } = useProgress();
+    const progressRef = useRef({ value: 0 });
+    const [displayProgress, setDisplayProgress] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        gsap.to(progressRef.current, {
+            value: progress, // Cible la valeur de Progress
+            duration: 0.3,
+            ease: "power2.out",
+            onUpdate: function () {
+                setDisplayProgress(Math.round(progressRef.current?.value)); // Met à jour l'affichage
+            },
+        });
+        if (progress == 100) {
+            setLoading(false);
+        }
+    }, [progress]);
 
     useEffect(() => {
         body.current = document.getElementsByTagName("body");
@@ -283,6 +304,23 @@ export default function Header({
 
     return (
         <>
+            {loading ? (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }} // Start animation (appear)
+                    animate={{ opacity: 1, y: 0 }} // End animation
+                    exit={{ opacity: 0, y: 20 }} // Exit animation (disappear)
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className={`absolute w-[100vw] h-[100vh] backdrop-blur-3xl bg-[${variables.background}] z-50 flex flex-col items-center justify-center`}>
+                    <p>Loading</p>
+                    <div className="flex w-fit items-center gap-2">
+                        <Progress
+                            value={displayProgress}
+                            className="w-[200px]"
+                        />
+                        <span>{displayProgress}%</span>
+                    </div>
+                </motion.div>
+            ) : null}
             <div
                 ref={drawer}
                 id="menuDrawer"
