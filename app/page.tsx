@@ -1,6 +1,6 @@
 "use client";
 
-import { LegacyRef, useEffect, useRef, useState } from "react";
+import { LegacyRef, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
     AdditiveActionName,
@@ -9,7 +9,12 @@ import {
 } from "@/components/Gltf/Character";
 //import { Character2, BaseActionName } from "@/components/Gltf/character2";
 //import { Character3 } from "@/components/Gltf/character3";
-import { CameraControls, ScrollControls, useScroll } from "@react-three/drei";
+import {
+    CameraControls,
+    ScrollControls,
+    useProgress,
+    useScroll,
+} from "@react-three/drei";
 import { easing } from "maath";
 import * as THREE from "three";
 import { Overlay } from "@/components/Overlay";
@@ -21,6 +26,7 @@ import gsap from "gsap";
 type ExtendedScroll = ReturnType<typeof useScroll> & {
     scroll: {
         current: number;
+        onChange: (el: () => void) => void;
     }; // Replace `any` with the correct type if known
 };
 
@@ -62,7 +68,7 @@ export default function Home() {
                         setAnimation={setAnimation}
                         section={section}
                         setSection={setSection}></ScrollAnimation>
-                    {/* <ProjectsPortals /> */}
+                    {/*  <ProjectsPortals /> */}
                 </ScrollControls>
             </Canvas>
         </div>
@@ -92,8 +98,55 @@ const ScrollAnimation = ({
     >("none");
     const currentRefAction = useRef("idle");
     const currentRefAdditiveAction = useRef("none");
+    const particlesGeometry = new THREE.PlaneGeometry(20, 10, 64, 32);
+    const textureLoader = new THREE.TextureLoader();
+    const particleTexture = useMemo(() => {
+        return textureLoader.load("/textures/particles/2.png");
+    }, []);
+    const mouseRef = useRef({ x: 0, y: 0 });
+    const { scroll } = useScroll() as ExtendedScroll;
+    const lastScroll = useRef(0);
+    const lerpFactor = 0.05;
+    const pointsRef = useRef(new THREE.Points());
+    const uniforms = useRef({
+        uMouse: { value: new THREE.Vector2(0.5, 0.5) }, // Position initiale de la souris en UV
+        uTexture: { value: particleTexture },
+        uColor: { value: new THREE.Color("#fffadb") },
+        uScroll: { value: 0 },
+    }).current;
+
+    useEffect(() => {
+        const updateMouse = (event: MouseEvent) => {
+            const x = event.clientX / window.innerWidth;
+            const y = 1 - event.clientY / window.innerHeight;
+            mouseRef.current = { x, y };
+            uniforms.uMouse.value.set(x, y);
+        };
+        window.addEventListener("mousemove", updateMouse);
+        return () => {
+            window.removeEventListener("mousemove", updateMouse);
+        };
+    }, []);
 
     useFrame((_, delta) => {
+        // console.log("vscroll", vScroll.current);
+        uniforms.uScroll.value =
+            Math.abs(scroll.current - lastScroll.current) * 30;
+        lastScroll.current = scroll.current;
+
+        if (pointsRef.current) {
+            // Appliquer une rotation inverse à la caméra
+            pointsRef.current.rotation.y = THREE.MathUtils.lerp(
+                pointsRef.current.rotation.y,
+                -mouseRef.current.y * 0.1,
+                lerpFactor
+            );
+            pointsRef.current.rotation.x = THREE.MathUtils.lerp(
+                pointsRef.current.rotation.x,
+                mouseRef.current.x * 0.1,
+                lerpFactor
+            );
+        }
         if (theme === "dark" && ambientLightRef.current) {
             easing.dampC(
                 ambientLightRef.current.color,
@@ -140,6 +193,46 @@ const ScrollAnimation = ({
         }
     });
 
+    const particlesMaterial = useMemo(() => {
+        return new THREE.ShaderMaterial({
+            uniforms,
+            vertexShader: `
+                varying vec2 vUv;
+                uniform vec2 uMouse;
+                uniform float uScroll;
+
+                void main() {
+                    vUv = uv;
+                    vec3 newPosition = position;
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    float dist = distance(uv, uMouse);
+
+                    float size = mix(0.1, 20.0, smoothstep(0.2, 0.0, dist));
+                    // gl_PointSize = size;
+                    gl_PointSize = mix(1.0, 5.0, uScroll);
+                    gl_PointSize *= size;
+                    // gl_PointSize *= (1.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+                }
+            `,
+            fragmentShader: `
+                precision mediump float;
+                uniform sampler2D uTexture;
+                uniform vec3 uColor;
+
+                void main() {
+                    vec4 texColor = texture2D(uTexture, gl_PointCoord);
+                    float brightness = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
+                    if (brightness < 0.1) discard;
+                    gl_FragColor = vec4(texColor.rgb * uColor, texColor.a);
+                }
+            `,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.NormalBlending,
+        });
+    }, [uniforms]);
+
     return (
         <>
             {/* <Stats /> */}
@@ -166,18 +259,7 @@ const ScrollAnimation = ({
                 setAnimation={setAnimation}
                 name={"normale"}
                 isWireframe={false}></Character>
-            {/* <Character2
-                theme={theme}
-                scale={0.8}
-                rotation={[0, 0.4, 0]}
-                position={[-4, -4.5, 0]}
-                animation={animation}
-                // currentAdditiveAction={currentBaseAction}
-                // setCurrentAdditiveAction={setCurrentBaseAction}
-                // currentBaseAction={currentBaseAction}
-                // setCurrentBaseAction={setCurrentBaseAction}
-                currentRefAction={currentRefAction}></Character2> */}
-            <Character
+            {/* <Character
                 section={section}
                 currentBaseAction={currentBaseAction}
                 setCurrentBaseAction={setCurrentBaseAction}
@@ -190,7 +272,13 @@ const ScrollAnimation = ({
                 animation={animation}
                 setAnimation={setAnimation}
                 isWireframe
-                name={"wireframe"}></Character>
+                name={"wireframe"}></Character> */}
+            <points
+                ref={pointsRef}
+                geometry={particlesGeometry}
+                position={[0, 0, -3]}
+                material={particlesMaterial}
+            />
             <Overlay
                 animation={animation}
                 section={section}
