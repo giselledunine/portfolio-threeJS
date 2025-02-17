@@ -1,14 +1,12 @@
 "use client";
 
-import { LegacyRef, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
     AdditiveActionName,
     BaseActionName,
     Character,
 } from "@/components/Gltf/Character";
-//import { Character2, BaseActionName } from "@/components/Gltf/character2";
-//import { Character3 } from "@/components/Gltf/character3";
 import { CameraControls, ScrollControls, useScroll } from "@react-three/drei";
 import { easing } from "maath";
 import * as THREE from "three";
@@ -26,9 +24,15 @@ type ExtendedScroll = ReturnType<typeof useScroll> & {
 };
 
 export default function Home() {
-    const controlsRef = useRef() as LegacyRef<CameraControls> | undefined;
+    const controlsRef = useRef<CameraControls>(null);
     const [animation, setAnimation] = useState(false);
     const [section, setSection] = useState(0);
+
+    useEffect(() => {
+        if (section != 4 && controlsRef.current) {
+            controlsRef.current.reset();
+        }
+    }, [section]);
 
     return (
         <div className="w-[100vw] h-[100vh]">
@@ -42,16 +46,15 @@ export default function Home() {
                     zoom: 5,
                 }}
                 gl={{ localClippingEnabled: true }}>
-                {/* <CameraMouvment animation={animation} /> */}
+                <CameraMouvment animation={animation} section={section} />
                 <CameraControls
+                    smoothTime={0.3}
                     ref={controlsRef}
-                    // minDistance={3} // Minimum distance for zoom
-                    // maxDistance={20}
                     maxPolarAngle={Math.PI / 2}
                     minPolarAngle={Math.PI / 6}
                     minDistance={5}
                     maxDistance={10}
-                    enabled={section === 4 ? true : false}
+                    enabled={section > 3 ? true : false}
                 />
                 <ScrollControls pages={5} damping={0.25}>
                     <ScrollManager
@@ -254,7 +257,7 @@ const ScrollAnimation = ({
                 setAnimation={setAnimation}
                 name={"normale"}
                 isWireframe={false}></Character>
-            {/* <Character
+            <Character
                 section={section}
                 currentBaseAction={currentBaseAction}
                 setCurrentBaseAction={setCurrentBaseAction}
@@ -267,7 +270,7 @@ const ScrollAnimation = ({
                 animation={animation}
                 setAnimation={setAnimation}
                 isWireframe
-                name={"wireframe"}></Character> */}
+                name={"wireframe"}></Character>
             <points
                 ref={pointsRef}
                 geometry={particlesGeometry}
@@ -288,25 +291,26 @@ const ScrollAnimation = ({
     );
 };
 
-// const CameraMouvment = ({ animation }: { animation: boolean }) => {
-//     const { camera } = useThree();
-//     const targetPosition = useMemo(() => new THREE.Vector3(-5, -1.5, 8), []);
-//     const targetRotation = useMemo(
-//         () => camera.rotation.y - Math.PI / 12,
-//         [camera.rotation.y]
-//     );
+const CameraMouvment = ({
+    section,
+}: {
+    animation: boolean;
+    section: number;
+}) => {
+    const { camera } = useThree();
+    const targetPosition = useMemo(() => new THREE.Vector3(0, 0, 10), []);
+    const targetRotation = useMemo(() => 0, []);
 
-//     useFrame((_, delta) => {
-//         if (animation) {
-//             easing.damp3(camera.position, targetPosition, 0.5, delta);
-//             easing.dampAngle(camera.rotation, "y", targetRotation, 0.5, delta);
-//         } else {
-//             easing.damp3(camera.position, [0, 0, 10], 0.5, delta);
-//             easing.dampAngle(camera.rotation, "y", 0, 0.5, delta);
-//         }
-//     });
-//     return null;
-// };
+    useFrame((_, delta) => {
+        if (section !== 4) {
+            easing.damp3(camera.position, targetPosition, 0.5, delta);
+            easing.dampAngle(camera.rotation, "y", targetRotation, 0.5, delta);
+            easing.dampAngle(camera.rotation, "x", targetRotation, 0.5, delta);
+            easing.dampAngle(camera.rotation, "z", targetRotation, 0.5, delta);
+        }
+    });
+    return null;
+};
 
 const ScrollManager = (props: {
     section: number;
