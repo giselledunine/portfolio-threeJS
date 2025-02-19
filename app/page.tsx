@@ -4,10 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
     EffectComposer,
-    Bloom,
+    //Bloom,
     DepthOfField,
 } from "@react-three/postprocessing";
-import { BlendFunction, KernelSize } from "postprocessing";
+//import { BlendFunction, KernelSize } from "postprocessing";
 import {
     AdditiveActionName,
     BaseActionName,
@@ -53,13 +53,13 @@ export default function Home() {
                 }}
                 gl={{ localClippingEnabled: true }}>
                 <EffectComposer>
-                    <Bloom
+                    {/* <Bloom
                         intensity={0.5} // Intensité de l'effet
                         luminanceThreshold={0.1}
                         luminanceSmoothing={0.2}
                         kernelSize={KernelSize.MEDIUM}
                         blendFunction={BlendFunction.ADD} // Mode de fusion
-                    />
+                    /> */}
                     <DepthOfField
                         focusDistance={0} // Distance de mise au point
                         focalLength={0.15} // Intensité de l'effet
