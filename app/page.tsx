@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import {
-    EffectComposer,
-    //Bloom,
-    DepthOfField,
-} from "@react-three/postprocessing";
+// import {
+//     EffectComposer,
+//     //Bloom,
+//     DepthOfField,
+// } from "@react-three/postprocessing";
 //import { BlendFunction, KernelSize } from "postprocessing";
 import {
     AdditiveActionName,
@@ -52,20 +52,20 @@ export default function Home() {
                     zoom: 5,
                 }}
                 gl={{ localClippingEnabled: true }}>
-                <EffectComposer>
-                    {/* <Bloom
+                {/* <EffectComposer>
+                    <Bloom
                         intensity={0.5} // Intensité de l'effet
                         luminanceThreshold={0.1}
                         luminanceSmoothing={0.2}
                         kernelSize={KernelSize.MEDIUM}
                         blendFunction={BlendFunction.ADD} // Mode de fusion
-                    /> */}
+                    /> 
                     <DepthOfField
                         focusDistance={0} // Distance de mise au point
                         focalLength={0.15} // Intensité de l'effet
                         bokehScale={3} // Taille du flou
                     />
-                </EffectComposer>
+                </EffectComposer> */}
                 <CameraMouvment animation={animation} section={section} />
                 <CameraControls
                     smoothTime={0.3}
