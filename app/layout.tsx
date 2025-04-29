@@ -15,12 +15,12 @@ const JetBrainMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Protfolio Sophia Hmamouche",
+    title: "Portfolio Sophia Hmamouche",
     description: "Développeuse Fullstack",
     twitter: {
         card: "summary_large_image",
-        title: "Next.js",
-        description: "The React Framework for the Web",
+        title: "Portfolio Sophia Hmamouche",
+        description: "3d Portfolio of Sophia Hmamouche",
         siteId: "1467726470533754880",
         creator: "@nextjs",
         creatorId: "1467726470533754880",
