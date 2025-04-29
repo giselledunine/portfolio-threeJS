@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         siteId: "1467726470533754880",
         creator: "@nextjs",
         creatorId: "1467726470533754880",
-        images: ["https://nextjs.org/og.png"], // Must be an absolute URL
+        images: ["https://3d.sophiahmamouche.com/twitterCard.png"], // Must be an absolute URL
     },
 };
 
