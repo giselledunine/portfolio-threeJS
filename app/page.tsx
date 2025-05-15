@@ -87,8 +87,8 @@ export default function Home() {
                 }}
                 gl={{ localClippingEnabled: true }}>
                 {/*<EffectComposer>
-                  <Pixelation granularity={3}></Pixelation> */}
-                {/* <Bloom
+                  <Pixelation granularity={3}></Pixelation> 
+              <Bloom
                         intensity={0.5} // Intensité de l'effet
                         luminanceThreshold={0.1}
                         luminanceSmoothing={0.2}
@@ -102,7 +102,7 @@ export default function Home() {
                     />
                 </EffectComposer>*/}
                 <CameraMouvment animation={animation} section={section} />
-                <CameraControls
+                {/* <CameraControls
                     smoothTime={0.3}
                     ref={controlsRef}
                     maxPolarAngle={Math.PI / 2}
@@ -110,7 +110,7 @@ export default function Home() {
                     minDistance={5}
                     maxDistance={10}
                     enabled={section > 3 ? true : false}
-                />
+                /> */}
                 <ScrollControls pages={5} damping={0.25}>
                     <ScrollManager
                         section={section}
