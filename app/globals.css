@@ -103,6 +103,14 @@ body {
     background: radial-gradient(48% 48% at center,#FFBCC5, #000000);
   }
 
+  canvas {
+    touch-action: auto !important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
   /* body > div {
     background-image: url("../public/radial.jpg"); 
     background-size: contain;

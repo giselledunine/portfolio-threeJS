@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-// import {
-//     EffectComposer,
-//     //Bloom,
-//     DepthOfField,
-// } from "@react-three/postprocessing";
+import // EffectComposer,
+// Pixelation,
+//Bloom,
+//DepthOfField,
+"@react-three/postprocessing";
 //import { BlendFunction, KernelSize } from "postprocessing";
 import {
     AdditiveActionName,
@@ -29,10 +29,44 @@ type ExtendedScroll = ReturnType<typeof useScroll> & {
     }; // Replace `any` with the correct type if known
 };
 
+// const PixelationShader = {
+//     uniforms: {
+//         tDiffuse: { value: null },
+//         resolution: { value: [window.innerWidth, window.innerHeight] },
+//         pixelSize: { value: 6.0 }, // Adjust pixel size to match old screen resolution
+//     },
+//     vertexShader: `
+//       varying vec2 vUv;
+//       void main() {
+//         vUv = uv;
+//         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+//       }
+//     `,
+//     fragmentShader: `
+//       varying vec2 vUv;
+//       uniform sampler2D tDiffuse;
+//       uniform vec2 resolution;
+//       uniform float pixelSize;
+
+//       void main() {
+//         vec2 dxy = pixelSize / resolution;
+//         vec2 coord = dxy * floor(vUv / dxy);
+//         vec4 color = texture2D(tDiffuse, coord);
+
+//         // Fake monochrome / sepia color limitation
+//         float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114)); // Convert to grayscale
+//         vec3 minitelColor = vec3(gray, gray * 0.9, gray * 0.7); // Adds a slight sepia tone
+
+//         gl_FragColor = vec4(minitelColor, color.a);
+//       }
+//     `,
+// };
+
 export default function Home() {
     const controlsRef = useRef<CameraControls>(null);
     const [animation, setAnimation] = useState(false);
     const [section, setSection] = useState(0);
+    //const pixelationPass = useMemo(() => new ShaderPass(PixelationShader), []);
 
     useEffect(() => {
         if (section != 4 && controlsRef.current) {
@@ -52,8 +86,9 @@ export default function Home() {
                     zoom: 5,
                 }}
                 gl={{ localClippingEnabled: true }}>
-                {/* <EffectComposer>
-                    <Bloom
+                {/*<EffectComposer>
+                  <Pixelation granularity={3}></Pixelation> */}
+                {/* <Bloom
                         intensity={0.5} // Intensité de l'effet
                         luminanceThreshold={0.1}
                         luminanceSmoothing={0.2}
@@ -65,7 +100,7 @@ export default function Home() {
                         focalLength={0.15} // Intensité de l'effet
                         bokehScale={3} // Taille du flou
                     />
-                </EffectComposer> */}
+                </EffectComposer>*/}
                 <CameraMouvment animation={animation} section={section} />
                 <CameraControls
                     smoothTime={0.3}
@@ -226,7 +261,7 @@ const ScrollAnimation = ({
                     float dist = distance(uv, uMouse);
 
                     float size = mix(0.1, 20.0, smoothstep(0.2, 0.0, dist));
-                    // gl_PointSize = size;
+               
                     gl_PointSize = mix(1.0, 5.0, uScroll);
                     gl_PointSize *= size;
                     // gl_PointSize *= (1.0 / -mvPosition.z);
