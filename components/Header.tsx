@@ -324,9 +324,9 @@ export default function Header({
             <div
                 ref={drawer}
                 id="menuDrawer"
-                className="absolute z-50 flex gap-4 justify-end -right-[380px]">
+                className="absolute z-50 flex gap-8 justify-end -right-[380px]">
                 <div
-                    className="w-fit h-fit hover:cursor-pointer bg-primary p-2 rounded-lg mt-4 ml-4"
+                    className="w-fit h-fit hover:cursor-pointer bg-primary p-2 rounded-lg mt-8 ml-8"
                     onClick={() => setOpen((prev) => !prev)}
                     onMouseEnter={() => iconAnimation(true)}
                     onMouseLeave={() => iconAnimation(false)}>
@@ -335,7 +335,7 @@ export default function Header({
                         className="text-secondary"></MenuIcon>
                     <X
                         ref={closeIcon}
-                        className="absolute top-6 opacity-0 text-secondary"></X>
+                        className="absolute top-10 opacity-0 text-secondary"></X>
                 </div>
                 <div
                     className={`flex flex-col justify-center text-lg font-bold shadow-inner backdrop-blur-md bg-[${variables.background}] bg-opacity-25 w-[300px] h-[100vh] z-50 `}>
@@ -393,7 +393,7 @@ export default function Header({
                     </div>
                 </div>
             </div>
-            <section className="w-[100vw] h-[100px] flex justify-center fixed top-0 z-10">
+            <section className="w-[100vw] h-[100px] md:flex justify-center hidden fixed top-0 z-10">
                 <div
                     ref={header}
                     className="flex gap-8 justify-center items-center invisible lg:visible">
