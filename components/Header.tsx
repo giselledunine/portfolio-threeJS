@@ -22,6 +22,7 @@ export default function Header({
     const header = useRef<HTMLDivElement>(null);
     const icon = useRef<HTMLDivElement>(null);
     const drawer = useRef<HTMLDivElement>(null);
+    const container = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
     const [visibleHeader, setVisibleHeader] = useState(false);
     const [mouseOverMenu, setMouseOverMenu] = useState("");
@@ -97,8 +98,14 @@ export default function Header({
     };
 
     useEffect(() => {
-        if (drawer.current) {
+        if (drawer.current && container.current) {
             if (open) {
+                gsap.to(container.current, {
+                    duration: 0.8,
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    pointerEvents: "auto",
+                    backdropFilter: "blur(12px)",
+                });
                 gsap.to(drawer.current, {
                     duration: 1,
                     right: "0",
@@ -124,6 +131,12 @@ export default function Header({
                         ease: "bounce",
                     });
                 } else {
+                    gsap.to(container.current, {
+                        duration: 0.5,
+                        pointerEvents: "none",
+                        backgroundColor: "rgba(0, 0, 0, 0)",
+                        backdropFilter: "blur(0px)",
+                    });
                     gsap.to(drawer.current, {
                         duration: 1,
                         right: "-300px",
@@ -303,7 +316,9 @@ export default function Header({
     };
 
     return (
-        <>
+        <div
+            ref={container}
+            className="absolute w-[100vw] h-[100vh] z-10 pointer-events-none backdrop-blur-none">
             {loading ? (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }} // Start animation (appear)
@@ -324,9 +339,9 @@ export default function Header({
             <div
                 ref={drawer}
                 id="menuDrawer"
-                className="absolute z-50 flex gap-8 justify-end -right-[380px]">
+                className="flex gap-8 absolute justify-end h-full -right-[380px] z-20">
                 <div
-                    className="w-fit h-fit hover:cursor-pointer bg-primary p-2 rounded-lg mt-8 ml-8"
+                    className="pointer-events-auto w-9 h-9 hover:cursor-pointer flex justify-center items-center bg-primary rounded-lg mt-8 ml-8"
                     onClick={() => setOpen((prev) => !prev)}
                     onMouseEnter={() => iconAnimation(true)}
                     onMouseLeave={() => iconAnimation(false)}>
@@ -335,10 +350,10 @@ export default function Header({
                         className="text-secondary"></MenuIcon>
                     <X
                         ref={closeIcon}
-                        className="absolute top-10 opacity-0 text-secondary"></X>
+                        className="absolute top-[38px] opacity-0 text-secondary"></X>
                 </div>
                 <div
-                    className={`flex flex-col justify-center text-lg font-bold shadow-inner backdrop-blur-md bg-[${variables.background}] bg-opacity-25 w-[300px] h-[100vh] z-50 `}>
+                    className={`pointer-events-auto flex flex-col bg-background justify-center text-xl font-bold bg-[${variables.background}] w-[300px] z-50 `}>
                     <div className="flex flex-col gap-4 p-6">
                         <div
                             onClick={() => onSectionChange(0)}
@@ -393,7 +408,7 @@ export default function Header({
                     </div>
                 </div>
             </div>
-            <section className="w-[100vw] h-[100px] md:flex justify-center hidden fixed top-0 z-10">
+            <section className="w-[100vw] h-[100px] md:flex justify-center hidden fixed top-0 z-10 pointer-events-auto">
                 <div
                     ref={header}
                     className="flex gap-8 justify-center items-center invisible lg:visible">
@@ -438,6 +453,6 @@ export default function Header({
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     );
 }

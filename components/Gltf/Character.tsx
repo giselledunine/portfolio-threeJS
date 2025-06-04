@@ -251,7 +251,8 @@ export function Character({
             }
         });
         return clonedScene;
-    }, [isWireframe, scene, clippingPlane, clippingPlaneIsWireframe, theme]);
+    }, [isWireframe, scene, clippingPlane, clippingPlaneIsWireframe]);
+    //Ne jamais ajouter "theme" dans les dépendences à ce niveau là même si le linter le demande
     const { nodes, materials } = useGraph(clone) as GLTFResult;
     const { mixer } = useAnimations(animations, group);
     // const [mouseX, setMouseX] = useState(0);

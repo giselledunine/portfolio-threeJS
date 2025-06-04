@@ -2,12 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import // EffectComposer,
-// Pixelation,
-//Bloom,
-//DepthOfField,
-"@react-three/postprocessing";
-//import { BlendFunction, KernelSize } from "postprocessing";
+// import {
+//     EffectComposer,
+//     Pixelation,
+//     Bloom,
+//     DepthOfField,
+// } from "@react-three/postprocessing";
+// import { BlendFunction, KernelSize } from "postprocessing";
 import {
     AdditiveActionName,
     BaseActionName,
@@ -75,7 +76,9 @@ export default function Home() {
     }, [section]);
 
     return (
-        <div className="w-[100vw] h-[100vh]">
+        <div
+            style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+            className="w-[100vw] h-[100vh] relative overflow-hidden">
             <Header section={section} onSectionChange={setSection} />
             <Canvas
                 className="z-1"
@@ -86,31 +89,22 @@ export default function Home() {
                     zoom: 5,
                 }}
                 gl={{ localClippingEnabled: true }}>
-                {/*<EffectComposer>
-                  <Pixelation granularity={3}></Pixelation> 
-              <Bloom
+                {/* <EffectComposer>
+                    <Pixelation granularity={3}></Pixelation>
+                    <Bloom
                         intensity={0.5} // Intensité de l'effet
                         luminanceThreshold={0.1}
                         luminanceSmoothing={0.2}
                         kernelSize={KernelSize.MEDIUM}
                         blendFunction={BlendFunction.ADD} // Mode de fusion
-                    /> 
+                    />
                     <DepthOfField
                         focusDistance={0} // Distance de mise au point
                         focalLength={0.15} // Intensité de l'effet
                         bokehScale={3} // Taille du flou
                     />
-                </EffectComposer>*/}
+                </EffectComposer> */}
                 <CameraMouvment animation={animation} section={section} />
-                {/* <CameraControls
-                    smoothTime={0.3}
-                    ref={controlsRef}
-                    maxPolarAngle={Math.PI / 2}
-                    minPolarAngle={Math.PI / 6}
-                    minDistance={5}
-                    maxDistance={10}
-                    enabled={section > 3 ? true : false}
-                /> */}
                 <ScrollControls pages={5} damping={0.25}>
                     <ScrollManager
                         section={section}
@@ -121,7 +115,6 @@ export default function Home() {
                         setAnimation={setAnimation}
                         section={section}
                         setSection={setSection}></ScrollAnimation>
-                    {/*  <ProjectsPortals /> */}
                 </ScrollControls>
             </Canvas>
         </div>

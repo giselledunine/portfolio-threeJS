@@ -495,7 +495,7 @@ export function Overlay({
                                 Wireframe
                             </Button>
                         </div>
-                        <div className="flex-col bg-white/50 p-2 md:p-4 rounded-xl">
+                        <div className="flex-col bg-primary/20 p-2 md:p-4 rounded-xl">
                             <h2>Animations</h2>
                             <div className="flex justify-between md:justify-start flex-wrap gap-2">
                                 {baseActionsName.map((el) => (
@@ -522,7 +522,7 @@ export function Overlay({
                                 ))}
                             </div>
                         </div>
-                        <div className="flex flex-col bg-white/50 p-2 md:p-4 rounded-xl">
+                        <div className="flex flex-col bg-primary/20 p-2 md:p-4 rounded-xl">
                             <h2>Faces</h2>
                             <div className="flex flex-wrap gap-2 justify-between md:justify-start">
                                 {additiveActionsName.map((el) => (

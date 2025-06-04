@@ -3,9 +3,9 @@ export function SmileSimpleFace({ className = "" }) {
         <svg
             width="293"
             height="293"
+            className={className}
             viewBox="0 0 293 293"
             fill="none"
-            className={className}
             xmlns="http://www.w3.org/2000/svg">
             <ellipse cx="99.5" cy="123" rx="13.5" ry="24" fill="currentColor" />
             <ellipse
@@ -18,9 +18,9 @@ export function SmileSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M121 87C121 82.0283 114.55 70 99.7529 70C84.9559 70 78 81.066 78 87"
@@ -49,10 +49,10 @@ export function JudgmentalSimpleFace({ className = "" }) {
     return (
         <svg
             width="293"
+            className={className}
             height="293"
             viewBox="0 0 293 293"
             fill="none"
-            className={className}
             xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M114 226.5C131.5 219.5 149 200 167 193.5C185 187 195 199.5 195 215"
@@ -71,9 +71,9 @@ export function JudgmentalSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M133 93C128.093 100.36 74 72.2906 74 97.5002"
@@ -96,9 +96,9 @@ export function RegularSimpleFace({ className = "" }) {
         <svg
             width="293"
             height="293"
+            className={className}
             viewBox="0 0 293 293"
             fill="none"
-            className={className}
             xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M90 174C90 187.746 106.95 221 145.835 221C184.721 221 203 190.406 203 174"
@@ -129,9 +129,9 @@ export function RegularSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
         </svg>
     );
@@ -157,9 +157,9 @@ export function SadSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M131.5 71.5C121 87.5002 83.5 81.5 74 109.5"
@@ -188,9 +188,9 @@ export function ScaredSimpleFace({ className = "" }) {
         <svg
             width="293"
             height="293"
+            className={className}
             viewBox="0 0 293 293"
             fill="none"
-            className={className}
             xmlns="http://www.w3.org/2000/svg">
             <ellipse cx="99.5" cy="123" rx="11.5" ry="20" fill="currentColor" />
             <ellipse
@@ -203,9 +203,9 @@ export function ScaredSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M131.5 60C121 76.0002 83.5 70 74 98"
@@ -235,9 +235,9 @@ export function SurprisedSimpleFace({ className = "" }) {
         <svg
             width="293"
             height="293"
+            className={className}
             viewBox="0 0 293 293"
             fill="none"
-            className={className}
             xmlns="http://www.w3.org/2000/svg">
             <ellipse cx="99.5" cy="123" rx="13.5" ry="24" fill="currentColor" />
             <ellipse
@@ -257,9 +257,9 @@ export function SurprisedSimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M121 87C121 82.0283 114.55 70 99.7529 70C84.9559 70 78 81.066 78 87"
@@ -297,9 +297,9 @@ export function AngrySimpleFace({ className = "" }) {
             <circle
                 cx="146.5"
                 cy="146.5"
-                r="145"
+                r="141"
                 stroke="currentColor"
-                stroke-width="3"
+                stroke-width="11"
             />
             <path
                 d="M105.5 220.5C119.5 192.5 124 212.56 152.5 208C181 203.44 183.5 191.5 199.5 216.5"
