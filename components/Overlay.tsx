@@ -8,10 +8,27 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
 import { AdditiveActionName, BaseActionName } from "./Gltf/Character";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ParcoursIcon from "./Icons/ParcoursIcon";
 import GiselleIcon from "./Icons/GiselleIcon";
 import Image from "next/image";
+import {
+    Idle,
+    Walking,
+    Jogging,
+    Breakdance,
+    Angry,
+    Excited,
+    Thankful,
+    Greeting,
+    AngrySimpleFace,
+    JudgmentalSimpleFace,
+    RegularSimpleFace,
+    SadSimpleFace,
+    ScaredSimpleFace,
+    SmileSimpleFace,
+    SurprisedSimpleFace,
+} from "@/components/Icons";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -19,7 +36,6 @@ export function Overlay({
     animation,
     setAnimation,
     section,
-    setSection,
     currentBaseAction,
     setCurrentBaseAction,
     currentAdditiveAction,
@@ -42,22 +58,23 @@ export function Overlay({
     gsap.registerPlugin(ScrollToPlugin);
     const scroll = useScroll();
     const baseActionsName = [
-        "idle",
-        "walking",
-        "greeting",
-        "breakdance",
-        "angry",
-        "excited",
-        "jogging",
-        "thankful",
+        { name: "idle", icon: Idle },
+        { name: "walking", icon: Walking },
+        { name: "greeting", icon: Greeting },
+        { name: "breakdance", icon: Breakdance },
+        { name: "angry", icon: Angry },
+        { name: "excited", icon: Excited },
+        { name: "jogging", icon: Jogging },
+        { name: "thankful", icon: Thankful },
     ];
     const additiveActionsName = [
-        "smile",
-        "judgmental",
-        "surprised",
-        "sad",
-        "scared",
-        "angryFace",
+        { name: "regular", icon: RegularSimpleFace },
+        { name: "smile", icon: SmileSimpleFace },
+        { name: "judgmental", icon: JudgmentalSimpleFace },
+        { name: "surprised", icon: SurprisedSimpleFace },
+        { name: "sad", icon: SadSimpleFace },
+        { name: "scared", icon: ScaredSimpleFace },
+        { name: "angryFace", icon: AngrySimpleFace },
     ];
 
     const scrollToSection = () => {
@@ -144,10 +161,6 @@ export function Overlay({
     const [strokeColor, setStrokeColor] = useState(
         theme === "dark" ? "#FFFADE" : "#000"
     );
-    const dribbble = useRef(null);
-    const linkedin = useRef(null);
-    const behance = useRef(null);
-    const artstation = useRef(null);
 
     const [isZoomed, setIsZoomed] = useState("none");
     const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
@@ -176,56 +189,6 @@ export function Overlay({
             setTimeout(() => setAnimationWithTimeout(false), 1800);
         }
     }, [animation]);
-
-    useEffect(() => {
-        gsap.from(dribbble.current, {
-            y: -20, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-        });
-        gsap.from(linkedin.current, {
-            y: 10, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-        });
-        gsap.from(behance.current, {
-            y: -20, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-        });
-        gsap.from(artstation.current, {
-            y: 30, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-        });
-        gsap.to(dribbble.current, {
-            y: 20, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-            yoyo: true,
-            repeat: -1,
-            duration: 8,
-        });
-        gsap.to(linkedin.current, {
-            y: -30, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-            yoyo: true,
-            repeat: -1,
-            duration: 8,
-            delay: 0.2,
-        });
-        gsap.to(behance.current, {
-            y: 40, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-            yoyo: true,
-            repeat: -1,
-            duration: 8,
-            delay: 0.4,
-        });
-        gsap.to(artstation.current, {
-            y: -20, // Moves the ball 20px down
-            ease: "power1.inOut", // Smooth easing});
-            yoyo: true,
-            repeat: -1,
-            duration: 8,
-            delay: 0.6,
-        });
-    }, []);
 
     useEffect(() => {
         if (section == 1) {
@@ -305,7 +268,7 @@ export function Overlay({
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col gap-6 mt-6 sm:mt-0 lg:gap-12 md:w-[55%] lg:w-[50%] p-8 md-p-0">
+                    className="flex flex-col gap-6 mt-8 sm:mt-0 lg:gap-12 md:w-[55%] lg:w-[50%] p-8 md-p-0">
                     <ParcoursIcon
                         width="100%"
                         color={strokeColor}></ParcoursIcon>
@@ -456,14 +419,14 @@ export function Overlay({
             </div>
             <div
                 id="socials"
-                className="h-[100vh] w-[100vw] flex items-center p-[100px]">
+                className="h-[100vh] w-[100vw] flex md:items-center">
                 <motion.div
-                    className="mt-6 sm:mt-0 grid grid-cols-5 gap-8 p-8"
+                    className="mt-36 md:mt-6 sm:mt-0 flex h-fit flex-wrap w-full justify-center items-center md:grid md:grid-cols-5 gap-4 md:gap-8 p-8"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}>
                     <a
-                        ref={dribbble}
+                        className="w-12"
                         href="https://dribbble.com/Giselledunine"
                         target="blank">
                         <Image
@@ -473,7 +436,7 @@ export function Overlay({
                             height={80}></Image>
                     </a>
                     <a
-                        ref={linkedin}
+                        className="w-12"
                         href="https://www.linkedin.com/in/sophia-hmamouche/"
                         target="blank">
                         <Image
@@ -483,7 +446,7 @@ export function Overlay({
                             height={80}></Image>
                     </a>
                     <a
-                        ref={behance}
+                        className="w-12"
                         href="https://www.behance.net/sophiahmamouche"
                         target="blank">
                         <Image
@@ -493,7 +456,7 @@ export function Overlay({
                             height={80}></Image>
                     </a>
                     <a
-                        ref={artstation}
+                        className="w-12"
                         href="https://giselledunine.artstation.com/"
                         target="blank">
                         <Image
@@ -503,7 +466,7 @@ export function Overlay({
                             height={80}></Image>
                     </a>
                     <a
-                        ref={linkedin}
+                        className="w-12"
                         href="https://github.com/giselledunine"
                         target="blank">
                         <Image
@@ -517,69 +480,77 @@ export function Overlay({
             <div
                 id="playground"
                 className="h-[100vh] w-[100vw] flex items-start md:items-center p-8 lg:p-[100px] ">
-                <div className="grid grid-cols-none grid-rows-[38%_24%_38%] md:grid-rows-none md:grid-cols-[38%_24%_38%] w-full h-full md:h-fit">
+                <div className="grid grid-cols-1 grid-rows-[38%_24%_38%] md:grid-rows-none md:grid-cols-[1fr_2fr_1fr] w-full h-full md:h-fit">
                     <motion.div
-                        className="flex gap-4 grid grid-cols-3 md:grid-cols-1 flex-col mt-14 sm:mt-0"
+                        className="flex flex-col gap-4"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 1 }}>
                         <div>
                             <Button
-                                className="w-fit text-sm px-2 py-1 sm:px-4 py-2"
+                                className="w-fit text-sm"
                                 variant={animation ? "default" : "outline"}
                                 disabled={currentBaseAction !== "idle"}
                                 onClick={() => setAnimation((prev) => !prev)}>
                                 Wireframe
                             </Button>
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex-col bg-white/50 p-2 md:p-4 rounded-xl">
                             <h2>Animations</h2>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex justify-between md:justify-start flex-wrap gap-2">
                                 {baseActionsName.map((el) => (
                                     <Button
-                                        key={el}
-                                        className="w-fit capitalize text-sm px-2 py-1 sm:px-4 py-2"
+                                        size={"icon"}
+                                        key={el.name}
+                                        className="capitalize text-sm md:w-fit sm:px-2"
                                         disabled={animationWithTimeout}
                                         variant={
-                                            currentBaseAction === el
+                                            currentBaseAction === el.name
                                                 ? "default"
                                                 : "outline"
                                         }
-                                        //disabled={animation}
                                         onClick={() =>
                                             setCurrentBaseAction(
-                                                el as BaseActionName
+                                                el.name as BaseActionName
                                             )
                                         }>
-                                        {el}
+                                        <el.icon></el.icon>
+                                        <span className="hidden md:inline">
+                                            {el.name}
+                                        </span>
                                     </Button>
                                 ))}
                             </div>
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col bg-white/50 p-2 md:p-4 rounded-xl">
                             <h2>Faces</h2>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-2 justify-between md:justify-start">
                                 {additiveActionsName.map((el) => (
                                     <Button
-                                        key={el}
-                                        className="w-fit capitalize text-sm px-2 py-1 sm:px-4 py-2"
+                                        size={"icon"}
+                                        key={el.name}
+                                        className="md:w-fit capitalize text-sm sm:px-4"
                                         disabled={animationWithTimeout}
                                         variant={
-                                            currentAdditiveAction === el
+                                            currentAdditiveAction === el.name
                                                 ? "default"
                                                 : "outline"
                                         }
                                         //disabled={animation}
                                         onClick={() =>
                                             setCurrentAdditiveAction(
-                                                el as AdditiveActionName
+                                                el.name as AdditiveActionName
                                             )
                                         }>
-                                        {el == "angryFace" ? "Angry" : el}
+                                        <el.icon></el.icon>
+                                        <span className="hidden md:inline">
+                                            {el.name == "angryFace"
+                                                ? "Angry"
+                                                : el.name}
+                                        </span>
                                     </Button>
                                 ))}
                             </div>
-                            <p>Changing avatar outfits comming soon ...</p>
                         </div>
                     </motion.div>
                     <div></div>
@@ -588,16 +559,7 @@ export function Overlay({
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}>
-                        <Button
-                            className="w-fit text-sm px-2 py-1 sm:px-4 py-2"
-                            variant={"destructive"}
-                            disabled={animation}
-                            onClick={() => {
-                                setSection(3);
-                                setCurrentBaseAction("idle" as BaseActionName);
-                            }}>
-                            Leave Playground
-                        </Button>
+                        <p>Changing avatar outfits comming soon ...</p>
                     </motion.div>
                 </div>
             </div>
