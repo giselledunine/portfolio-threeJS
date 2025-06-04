@@ -251,7 +251,7 @@ export function Character({
             }
         });
         return clonedScene;
-    }, [isWireframe, scene, clippingPlane, clippingPlaneIsWireframe]);
+    }, [isWireframe, scene, clippingPlane, clippingPlaneIsWireframe, theme]);
     const { nodes, materials } = useGraph(clone) as GLTFResult;
     const { mixer } = useAnimations(animations, group);
     // const [mouseX, setMouseX] = useState(0);

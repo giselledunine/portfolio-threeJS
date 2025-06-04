@@ -151,9 +151,9 @@ const ScrollAnimation = ({
     >("none");
     const currentRefAction = useRef("idle");
     const currentRefAdditiveAction = useRef("none");
-    const particlesGeometry = new THREE.PlaneGeometry(20, 10, 64, 32);
-    const textureLoader = new THREE.TextureLoader();
+    //const particlesGeometry = new THREE.PlaneGeometry(20, 10, 64, 32);
     const particleTexture = useMemo(() => {
+        const textureLoader = new THREE.TextureLoader();
         return textureLoader.load("/textures/particles/2.png");
     }, []);
     const mouseRef = useRef({ x: 0, y: 0 });
@@ -179,7 +179,7 @@ const ScrollAnimation = ({
         return () => {
             window.removeEventListener("mousemove", updateMouse);
         };
-    }, []);
+    }, [uniforms.uMouse]);
 
     useFrame((_, delta) => {
         // console.log("vscroll", vScroll.current);
@@ -246,45 +246,45 @@ const ScrollAnimation = ({
         }
     });
 
-    const particlesMaterial = useMemo(() => {
-        return new THREE.ShaderMaterial({
-            uniforms,
-            vertexShader: `
-                varying vec2 vUv;
-                uniform vec2 uMouse;
-                uniform float uScroll;
+    // const particlesMaterial = useMemo(() => {
+    //     return new THREE.ShaderMaterial({
+    //         uniforms,
+    //         vertexShader: `
+    //             varying vec2 vUv;
+    //             uniform vec2 uMouse;
+    //             uniform float uScroll;
 
-                void main() {
-                    vUv = uv;
-                    vec3 newPosition = position;
-                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    float dist = distance(uv, uMouse);
+    //             void main() {
+    //                 vUv = uv;
+    //                 vec3 newPosition = position;
+    //                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    //                 float dist = distance(uv, uMouse);
 
-                    float size = mix(0.1, 20.0, smoothstep(0.2, 0.0, dist));
-               
-                    gl_PointSize = mix(1.0, 5.0, uScroll);
-                    gl_PointSize *= size;
-                    // gl_PointSize *= (1.0 / -mvPosition.z);
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-                }
-            `,
-            fragmentShader: `
-                precision mediump float;
-                uniform sampler2D uTexture;
-                uniform vec3 uColor;
+    //                 float size = mix(0.1, 20.0, smoothstep(0.2, 0.0, dist));
 
-                void main() {
-                    vec4 texColor = texture2D(uTexture, gl_PointCoord);
-                    float brightness = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
-                    if (brightness < 0.1) discard;
-                    gl_FragColor = vec4(texColor.rgb * uColor, texColor.a);
-                }
-            `,
-            transparent: true,
-            depthWrite: false,
-            blending: THREE.NormalBlending,
-        });
-    }, [uniforms]);
+    //                 gl_PointSize = mix(1.0, 5.0, uScroll);
+    //                 gl_PointSize *= size;
+    //                 // gl_PointSize *= (1.0 / -mvPosition.z);
+    //                 gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    //             }
+    //         `,
+    //         fragmentShader: `
+    //             precision mediump float;
+    //             uniform sampler2D uTexture;
+    //             uniform vec3 uColor;
+
+    //             void main() {
+    //                 vec4 texColor = texture2D(uTexture, gl_PointCoord);
+    //                 float brightness = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
+    //                 if (brightness < 0.1) discard;
+    //                 gl_FragColor = vec4(texColor.rgb * uColor, texColor.a);
+    //             }
+    //         `,
+    //         transparent: true,
+    //         depthWrite: false,
+    //         blending: THREE.NormalBlending,
+    //     });
+    // }, [uniforms]);
 
     return (
         <>
@@ -326,12 +326,12 @@ const ScrollAnimation = ({
                 setAnimation={setAnimation}
                 isWireframe
                 name={"wireframe"}></Character>
-            <points
+            {/*<points
                 ref={pointsRef}
                 geometry={particlesGeometry}
                 position={[0, 0, -3]}
                 material={particlesMaterial}
-            />
+            />*/}
             <Overlay
                 animation={animation}
                 section={section}
