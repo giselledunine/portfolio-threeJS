@@ -7,6 +7,7 @@ import { ScrollControls, useScroll } from "@react-three/drei";
 import * as THREE from "three";
 
 import { Overlay } from "@/components/Overlay";
+import Header from "@/components/Header";
 import {
     AdditiveActionName,
     BaseActionName,
@@ -31,7 +32,8 @@ export default function Home() {
     const [section, setSection] = useState(0);
 
     return (
-        <div className="h-full w-[100vw]">
+        <div className="h-full w-[100vw] relative overflow-hidden">
+            <Header section={section} onSectionChange={setSection} />
             <Canvas
                 className="z-1"
                 shadows
