@@ -204,7 +204,6 @@ export default function Header({
     useEffect(() => {
         if (header.current) {
             if (!visibleHeader) {
-                console.log("novisible", header.current);
                 gsap.to(header.current, {
                     duration: 1,
                     opacity: 0,
@@ -319,7 +318,7 @@ export default function Header({
         <div
             ref={container}
             className="absolute w-[100vw] h-[100vh] z-10 pointer-events-none backdrop-blur-none">
-            {loading ? (
+            {/* {loading ? (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }} // Start animation (appear)
                     animate={{ opacity: 1, y: 0 }} // End animation
@@ -335,7 +334,7 @@ export default function Header({
                         <span>{displayProgress}%</span>
                     </div>
                 </motion.div>
-            ) : null}
+            ) : null} */}
             <div
                 ref={drawer}
                 id="menuDrawer"

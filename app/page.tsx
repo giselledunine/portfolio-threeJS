@@ -78,7 +78,7 @@ export default function Home() {
     return (
         <div className="w-[100vw] h-[100vh] relative overflow-hidden">
             <Header section={section} onSectionChange={setSection} />
-            <Canvas
+            {/* <Canvas
                 className="z-1"
                 shadows
                 camera={{
@@ -87,7 +87,7 @@ export default function Home() {
                     zoom: 5,
                 }}
                 gl={{ localClippingEnabled: true }}>
-                {/* <EffectComposer>
+                <EffectComposer>
                     <Pixelation granularity={3}></Pixelation>
                     <Bloom
                         intensity={0.5} // Intensité de l'effet
@@ -101,7 +101,7 @@ export default function Home() {
                         focalLength={0.15} // Intensité de l'effet
                         bokehScale={3} // Taille du flou
                     />
-                </EffectComposer> */}
+                </EffectComposer>
                 <CameraMouvment animation={animation} section={section} />
                 <ScrollControls pages={5} damping={0.25}>
                     <ScrollManager
@@ -114,7 +114,7 @@ export default function Home() {
                         section={section}
                         setSection={setSection}></ScrollAnimation>
                 </ScrollControls>
-            </Canvas>
+            </Canvas> */}
         </div>
     );
 }
@@ -173,7 +173,6 @@ const ScrollAnimation = ({
     }, [uniforms.uMouse]);
 
     useFrame((_, delta) => {
-        // console.log("vscroll", vScroll.current);
         uniforms.uScroll.value =
             Math.abs(scroll.current - lastScroll.current) * 30;
         lastScroll.current = scroll.current;
