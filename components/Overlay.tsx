@@ -1,46 +1,48 @@
-import { Scroll, useScroll } from "@react-three/drei";
-import gsap from "gsap";
-import { useTheme } from "next-themes";
-import NameIcon from "./Icons/NameIcon";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { Progress } from "@/components/ui/progress";
-import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { ChevronDown } from "lucide-react";
-import { AdditiveActionName, BaseActionName } from "./Gltf/Character";
-import { useEffect, useMemo, useState } from "react";
-import ParcoursIcon from "./Icons/ParcoursIcon";
-import GiselleIcon from "./Icons/GiselleIcon";
-import Image from "next/image";
 import {
-    Idle,
-    Walking,
-    Jogging,
-    Breakdance,
-    Angry,
-    Excited,
-    Thankful,
-    Greeting,
-    AngrySimpleFace,
-    JudgmentalSimpleFace,
-    RegularSimpleFace,
-    SadSimpleFace,
-    ScaredSimpleFace,
-    SmileSimpleFace,
-    SurprisedSimpleFace,
-} from "@/components/Icons";
+    Scroll,
+    //  useScroll
+} from "@react-three/drei";
+import gsap from "gsap";
+// import { useTheme } from "next-themes";
+// import NameIcon from "./Icons/NameIcon";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+// import { Progress } from "@/components/ui/progress";
+// import { motion } from "framer-motion";
+// import { Button } from "./ui/button";
+// import { ChevronDown } from "lucide-react";
+import { AdditiveActionName, BaseActionName } from "./Gltf/Character";
+// import { useEffect, useMemo, useState } from "react";
+// import ParcoursIcon from "./Icons/ParcoursIcon";
+// import GiselleIcon from "./Icons/GiselleIcon";
+// import Image from "next/image";
+// import {
+//     Idle,
+//     Walking,
+//     Jogging,
+//     Breakdance,
+//     Angry,
+//     Excited,
+//     Thankful,
+//     Greeting,
+//     AngrySimpleFace,
+//     JudgmentalSimpleFace,
+//     RegularSimpleFace,
+//     SadSimpleFace,
+//     ScaredSimpleFace,
+//     SmileSimpleFace,
+//     SurprisedSimpleFace,
+// } from "@/components/Icons";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export function Overlay({
-    animation,
-    setAnimation,
-    section,
-    currentBaseAction,
-    setCurrentBaseAction,
-    currentAdditiveAction,
-    setCurrentAdditiveAction,
-}: {
+export function Overlay({}: // animation,
+// setAnimation,
+// section,
+// currentBaseAction,
+// setCurrentBaseAction,
+// currentAdditiveAction,
+// setCurrentAdditiveAction,
+{
     animation: boolean;
     setAnimation: React.Dispatch<React.SetStateAction<boolean>>;
     section: number;
@@ -54,168 +56,168 @@ export function Overlay({
         React.SetStateAction<AdditiveActionName | "none">
     >;
 }) {
-    const { theme } = useTheme();
+    // const { theme } = useTheme();
     gsap.registerPlugin(ScrollToPlugin);
-    const scroll = useScroll();
-    const baseActionsName = [
-        { name: "idle", icon: Idle },
-        { name: "walking", icon: Walking },
-        { name: "greeting", icon: Greeting },
-        { name: "breakdance", icon: Breakdance },
-        { name: "angry", icon: Angry },
-        { name: "excited", icon: Excited },
-        { name: "jogging", icon: Jogging },
-        { name: "thankful", icon: Thankful },
-    ];
-    const additiveActionsName = [
-        { name: "regular", icon: RegularSimpleFace },
-        { name: "smile", icon: SmileSimpleFace },
-        { name: "judgmental", icon: JudgmentalSimpleFace },
-        { name: "surprised", icon: SurprisedSimpleFace },
-        { name: "sad", icon: SadSimpleFace },
-        { name: "scared", icon: ScaredSimpleFace },
-        { name: "angryFace", icon: AngrySimpleFace },
-    ];
+    // const scroll = useScroll();
+    // const baseActionsName = [
+    //     { name: "idle", icon: Idle },
+    //     { name: "walking", icon: Walking },
+    //     { name: "greeting", icon: Greeting },
+    //     { name: "breakdance", icon: Breakdance },
+    //     { name: "angry", icon: Angry },
+    //     { name: "excited", icon: Excited },
+    //     { name: "jogging", icon: Jogging },
+    //     { name: "thankful", icon: Thankful },
+    // ];
+    // const additiveActionsName = [
+    //     { name: "regular", icon: RegularSimpleFace },
+    //     { name: "smile", icon: SmileSimpleFace },
+    //     { name: "judgmental", icon: JudgmentalSimpleFace },
+    //     { name: "surprised", icon: SurprisedSimpleFace },
+    //     { name: "sad", icon: SadSimpleFace },
+    //     { name: "scared", icon: ScaredSimpleFace },
+    //     { name: "angryFace", icon: AngrySimpleFace },
+    // ];
 
-    const scrollToSection = () => {
-        gsap.to(scroll.el, {
-            duration: 1,
-            scrollTo: scroll.el.clientHeight,
-            ease: "power1.inOut",
-        });
-    };
+    // const scrollToSection = () => {
+    //     gsap.to(scroll.el, {
+    //         duration: 1,
+    //         scrollTo: scroll.el.clientHeight,
+    //         ease: "power1.inOut",
+    //     });
+    // };
 
-    const dummySkills = useMemo(
-        () => [
-            {
-                name: "Javascript",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "ReactJS",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "VueJs",
-                value: 0,
-                target: 70,
-            },
-            {
-                name: "NextJs",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "ThreeJs / Fiber",
-                value: 0,
-                target: 50,
-            },
-            {
-                name: "Blender",
-                value: 0,
-                target: 70,
-            },
-            {
-                name: "Figma",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "GSAP",
-                value: 0,
-                target: 60,
-            },
-            {
-                name: "Python",
-                value: 0,
-                target: 50,
-            },
-            {
-                name: "PHP",
-                value: 0,
-                target: 75,
-            },
-            {
-                name: "API Rest",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "MongoDB",
-                value: 0,
-                target: 80,
-            },
-            {
-                name: "AWS",
-                value: 0,
-                target: 60,
-            },
-        ],
-        []
-    );
+    // const dummySkills = useMemo(
+    //     () => [
+    //         {
+    //             name: "Javascript",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "ReactJS",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "VueJs",
+    //             value: 0,
+    //             target: 70,
+    //         },
+    //         {
+    //             name: "NextJs",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "ThreeJs / Fiber",
+    //             value: 0,
+    //             target: 50,
+    //         },
+    //         {
+    //             name: "Blender",
+    //             value: 0,
+    //             target: 70,
+    //         },
+    //         {
+    //             name: "Figma",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "GSAP",
+    //             value: 0,
+    //             target: 60,
+    //         },
+    //         {
+    //             name: "Python",
+    //             value: 0,
+    //             target: 50,
+    //         },
+    //         {
+    //             name: "PHP",
+    //             value: 0,
+    //             target: 75,
+    //         },
+    //         {
+    //             name: "API Rest",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "MongoDB",
+    //             value: 0,
+    //             target: 80,
+    //         },
+    //         {
+    //             name: "AWS",
+    //             value: 0,
+    //             target: 60,
+    //         },
+    //     ],
+    //     []
+    // );
 
-    const [skills, setSkills] = useState(dummySkills);
-    const [animationWithTimeout, setAnimationWithTimeout] = useState(false);
-    const [strokeColor, setStrokeColor] = useState(
-        theme === "dark" ? "#FFFADE" : "#000"
-    );
+    // const [skills, setSkills] = useState(dummySkills);
+    // const [animationWithTimeout, setAnimationWithTimeout] = useState(false);
+    // const [strokeColor, setStrokeColor] = useState(
+    //     theme === "dark" ? "#FFFADE" : "#000"
+    // );
 
-    const [isZoomed, setIsZoomed] = useState("none");
-    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+    // const [isZoomed, setIsZoomed] = useState("none");
+    // const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!isZoomed) return;
-        const { left, top, width, height } =
-            e.currentTarget.getBoundingClientRect();
-        const x = (e.clientX - left) / width;
-        const y = (e.clientY - top) / height;
-        setPosition({ x, y });
-    };
+    // const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     if (!isZoomed) return;
+    //     const { left, top, width, height } =
+    //         e.currentTarget.getBoundingClientRect();
+    //     const x = (e.clientX - left) / width;
+    //     const y = (e.clientY - top) / height;
+    //     setPosition({ x, y });
+    // };
 
-    useEffect(() => {
-        if (theme === "light") {
-            setStrokeColor("#000");
-        } else {
-            setStrokeColor("#FFFADE");
-        }
-    }, [theme]);
+    // useEffect(() => {
+    //     if (theme === "light") {
+    //         setStrokeColor("#000");
+    //     } else {
+    //         setStrokeColor("#FFFADE");
+    //     }
+    // }, [theme]);
 
-    useEffect(() => {
-        if (animation) {
-            setAnimationWithTimeout(true);
-        } else {
-            setTimeout(() => setAnimationWithTimeout(false), 1800);
-        }
-    }, [animation]);
+    // useEffect(() => {
+    //     if (animation) {
+    //         setAnimationWithTimeout(true);
+    //     } else {
+    //         setTimeout(() => setAnimationWithTimeout(false), 1800);
+    //     }
+    // }, [animation]);
 
-    useEffect(() => {
-        if (section == 1) {
-            dummySkills.map((skill, index) => {
-                gsap.to(skill, {
-                    value: skill.target,
-                    onUpdate: function () {
-                        const updatedSkills = dummySkills.map((el) =>
-                            el.name === skill.name
-                                ? { ...el, value: skill.value }
-                                : el
-                        );
-                        setSkills(updatedSkills); // Update the React state
-                    },
-                    delay: index * 0.15 + 0.5,
-                    duration: 1,
-                    ease: "back.out(2)",
-                });
-            });
-        }
-    }, [section, dummySkills]);
+    // useEffect(() => {
+    //     if (section == 1) {
+    //         dummySkills.map((skill, index) => {
+    //             gsap.to(skill, {
+    //                 value: skill.target,
+    //                 onUpdate: function () {
+    //                     const updatedSkills = dummySkills.map((el) =>
+    //                         el.name === skill.name
+    //                             ? { ...el, value: skill.value }
+    //                             : el
+    //                     );
+    //                     setSkills(updatedSkills); // Update the React state
+    //                 },
+    //                 delay: index * 0.15 + 0.5,
+    //                 duration: 1,
+    //                 ease: "back.out(2)",
+    //             });
+    //         });
+    //     }
+    // }, [section, dummySkills]);
 
-    useEffect(() => {
-        if (section !== 3) {
-            setIsZoomed("none");
-        }
-    }, [section]);
+    // useEffect(() => {
+    //     if (section !== 3) {
+    //         setIsZoomed("none");
+    //     }
+    // }, [section]);
 
     // const fullText =
     //     "<b>Nom:</b> Sophia Hmamouche\n<b>Âge:</b> 23 ans\n<b>Passions:</b> Chant, Dessin, Animation, Guitar, Escalade";
@@ -238,13 +240,21 @@ export function Overlay({
     // }, [animation, index, text]);
 
     return (
-        <Scroll html>
+        <Scroll html style={{ height: "calc(100%*5)" }}>
+            <div className="grid grid-rows-5 h-full">
+                <div>Bonjour</div>
+                <div>Bonjour</div>
+                <div>Bonjour</div>
+                <div>Bonjour</div>
+                <div>Bonjour</div>
+            </div>
+            {/* 
             <motion.div
                 id="accueil"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="h-[100vh] w-[100vw] sm:mb-0 flex justify-center items-end md:items-center">
+                className={`h-full w-[100vw] sm:mb-0 flex justify-center items-end md:items-center`}>
                 <div className="w-full md:max-w-sm lg:max-w-screen-md flex flex-col gap-12 p-8 md:p-0 justify-center items-center">
                     <NameIcon color={strokeColor} />
                     <div className="bg-primary py-2 px-4 rounded-xl md:ml-[100px]">
@@ -263,7 +273,7 @@ export function Overlay({
             </motion.div>
             <div
                 id="parcours"
-                className="h-[100vh] w-[100vw] flex flex-col items-start jsutify-start md:justify-center gap-6 md:p-4 lg:p-[100px]">
+                className="h-full w-[100vw] flex flex-col items-start jsutify-start md:justify-center gap-6 md:p-4 lg:p-[100px]">
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -299,7 +309,7 @@ export function Overlay({
             </div>
             <div
                 id="model"
-                className="h-[100vh] w-[100vw]  sm:mb-0 flex justify-center p-8 md:p-[50px] lg:p-[100px]">
+                className="h-full w-[100vw]  sm:mb-0 flex justify-center p-8 md:p-[50px] lg:p-[100px]">
                 <motion.div
                     className="flex items-end md:items-center justify-end"
                     initial={{ opacity: 0 }}
@@ -417,9 +427,7 @@ export function Overlay({
                     </div>
                 </motion.div>
             </div>
-            <div
-                id="socials"
-                className="h-[100vh] w-[100vw] flex md:items-center">
+            <div id="socials" className="h-full w-[100vw] flex md:items-center">
                 <motion.div
                     className="mt-36 md:mt-6 sm:mt-0 flex h-fit flex-wrap w-full justify-center items-center md:grid md:grid-cols-5 gap-4 md:gap-8 p-8"
                     initial={{ opacity: 0 }}
@@ -479,7 +487,7 @@ export function Overlay({
             </div>
             <div
                 id="playground"
-                className="h-[100vh] w-[100vw]  sm:mb-0 flex items-start md:items-center p-8 lg:p-[100px] ">
+                className="h-full w-[100vw]  sm:mb-0 flex items-start md:items-center p-8 lg:p-[100px] ">
                 <div className="grid grid-cols-1 grid-rows-[38%_24%_38%] md:grid-rows-none md:grid-cols-[1fr_2fr_1fr] w-full h-full md:h-fit">
                     <motion.div
                         className="flex flex-col gap-4"
@@ -562,7 +570,8 @@ export function Overlay({
                         <p>Changing avatar outfits comming soon ...</p>
                     </motion.div>
                 </div>
-            </div>
+            </div> 
+            */}
 
             {/* <p
                 className={`cursor-animation ${
