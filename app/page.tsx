@@ -1,7 +1,9 @@
+"use client";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { CameraControls, ScrollControls, useScroll } from "@react-three/drei";
+import { ScrollControls, useScroll } from "@react-three/drei";
 import * as THREE from "three";
 
 import { Overlay } from "@/components/Overlay";
