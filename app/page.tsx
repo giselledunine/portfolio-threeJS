@@ -15,6 +15,8 @@ import {
 
 import { useTheme } from "next-themes";
 
+import gsap from "gsap";
+
 import { easing } from "maath";
 
 type ExtendedScroll = ReturnType<typeof useScroll> & {
