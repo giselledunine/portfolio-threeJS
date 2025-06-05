@@ -244,7 +244,7 @@ export function Overlay({
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="h-[100vh] w-[100vw] pb-[10vh] sm:mb-0 flex justify-center items-end md:items-center">
+                className="h-[100vh] w-[100vw] sm:mb-0 flex justify-center items-end md:items-center">
                 <div className="w-full md:max-w-sm lg:max-w-screen-md flex flex-col gap-12 p-8 md:p-0 justify-center items-center">
                     <NameIcon color={strokeColor} />
                     <div className="bg-primary py-2 px-4 rounded-xl md:ml-[100px]">
@@ -299,7 +299,7 @@ export function Overlay({
             </div>
             <div
                 id="model"
-                className="h-[100vh] w-[100vw] pb-[10vh] sm:mb-0 flex justify-center p-8 md:p-[50px] lg:p-[100px]">
+                className="h-[100vh] w-[100vw]  sm:mb-0 flex justify-center p-8 md:p-[50px] lg:p-[100px]">
                 <motion.div
                     className="flex items-end md:items-center justify-end"
                     initial={{ opacity: 0 }}
@@ -479,7 +479,7 @@ export function Overlay({
             </div>
             <div
                 id="playground"
-                className="h-[100vh] w-[100vw] pb-[10vh] sm:mb-0 flex items-start md:items-center p-8 lg:p-[100px] ">
+                className="h-[100vh] w-[100vw]  sm:mb-0 flex items-start md:items-center p-8 lg:p-[100px] ">
                 <div className="grid grid-cols-1 grid-rows-[38%_24%_38%] md:grid-rows-none md:grid-cols-[1fr_2fr_1fr] w-full h-full md:h-fit">
                     <motion.div
                         className="flex flex-col gap-4"
