@@ -34,9 +34,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning className="h-full">
             <body
-                className={`${JetBrainMono.variable} ${geistMono.variable} antialiased`}>
+                className={`${JetBrainMono.variable} ${geistMono.variable} antialiased h-full`}>
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
