@@ -14,7 +14,7 @@
 /coverage
 
 #sides
-/app/sidePage.tsx
+**/app/sidePage.tsx
 
 # next.js
 /.next/
