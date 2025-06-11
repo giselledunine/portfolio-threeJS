@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+#sides
+/app/sidePage.tsx
+
 # next.js
 /.next/
 /out/

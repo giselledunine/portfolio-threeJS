@@ -4,9 +4,9 @@ import { useTheme } from "next-themes";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MenuIcon, X } from "lucide-react";
-// import { useProgress } from "@react-three/drei";
-// import { Progress } from "./ui/progress";
-// import { motion } from "framer-motion";
+import { useProgress } from "@react-three/drei";
+import { Progress } from "./ui/progress";
+import { motion } from "framer-motion";
 
 export default function Header({
     section,
@@ -35,24 +35,24 @@ export default function Header({
         opacityMoon: "opacity-100",
         opacitySun: "opacity-0",
     });
-    // const { progress } = useProgress();
-    // const progressRef = useRef({ value: 0 });
-    // const [displayProgress, setDisplayProgress] = useState(0);
-    // const [loading, setLoading] = useState(true);
+    const { progress } = useProgress();
+    const progressRef = useRef({ value: 0 });
+    const [displayProgress, setDisplayProgress] = useState(0);
+    const [loading, setLoading] = useState(true);
 
-    // useEffect(() => {
-    //     gsap.to(progressRef.current, {
-    //         value: progress, // Cible la valeur de Progress
-    //         duration: 0.3,
-    //         ease: "power2.out",
-    //         onUpdate: function () {
-    //             setDisplayProgress(Math.round(progressRef.current?.value)); // Met à jour l'affichage
-    //         },
-    //     });
-    //     if (progress == 100) {
-    //         setLoading(false);
-    //     }
-    // }, [progress]);
+    useEffect(() => {
+        gsap.to(progressRef.current, {
+            value: progress, // Cible la valeur de Progress
+            duration: 0.3,
+            ease: "power2.out",
+            onUpdate: function () {
+                setDisplayProgress(Math.round(progressRef.current?.value)); // Met à jour l'affichage
+            },
+        });
+        if (progress == 100) {
+            setLoading(false);
+        }
+    }, [progress]);
 
     useEffect(() => {
         body.current = document.getElementsByTagName("body");
@@ -318,7 +318,7 @@ export default function Header({
         <div
             ref={container}
             className="absolute w-[100vw] h-[100vh] z-10 pointer-events-none backdrop-blur-none">
-            {/* {loading ? (
+            {loading ? (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }} // Start animation (appear)
                     animate={{ opacity: 1, y: 0 }} // End animation
@@ -334,7 +334,7 @@ export default function Header({
                         <span>{displayProgress}%</span>
                     </div>
                 </motion.div>
-            ) : null} */}
+            ) : null}
             <div
                 ref={drawer}
                 id="menuDrawer"
